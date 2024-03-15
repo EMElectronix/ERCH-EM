@@ -1,0 +1,7 @@
+/*******************--- CSS File for Index.java ---*******************/
+
+/* make menuBar font : bold */
+.root {
+    -fx-font-weight: bold;
+}
+

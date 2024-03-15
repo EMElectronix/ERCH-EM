@@ -1,6 +1,9 @@
 module desktop.app.erch {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.fazecast.jSerialComm;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
 
     opens desktop.app.erch to javafx.fxml;
