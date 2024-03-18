@@ -2,7 +2,6 @@ package desktop.app.erch.Connection;
 
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.event.Event;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,15 +18,17 @@ import static desktop.app.erch.Index.mainMenuBar;
 
 public class Comport {
      Logger log = LogManager.getLogger(Comport.class);
-    public boolean isEcuConnected = false;
-    public SerialPort serialPort = null;
+    public static boolean isEcuConnected = false ;
+    public static SerialPort serialPort = null;
     public Dialog<ButtonType> comDialog;
 
     public String selectedComPortName;
 
-    Connect cnt = new Connect();
+    static Connect cnt = new Connect();
 
     Disconnect discnt = new Disconnect();
+
+    String disconnect = "Disconnected";
 
     public void displayComport(Stage index) {
 
@@ -154,8 +155,11 @@ public class Comport {
               //Initialize Connect
              boolean connected =  cnt.Connection(serialPort);
              if(connected){
-                 mainMenuBar.getMenus().addAll(space(),ecuSNMenu(cnt.ecuSN));
-                 comDialog.setResult(ButtonType.CLOSE);
+                 mainMenuBar.getMenus().add(4,space());
+                 mainMenuBar.getMenus().add(5,ecuSNMenu());
+                 if(comDialog.isShowing()) {
+                     comDialog.setResult(ButtonType.CLOSE);
+                 }
                  isEcuConnected=true;
                  sof("Connection Established", "The connection has been established.", true);
                  serialPort.closePort();
@@ -165,16 +169,26 @@ public class Comport {
 
         disconnectButton.setOnAction(e -> {
             if(isEcuConnected && serialPort!=null){
-                discnt.disConnect(serialPort);
-                mainMenuBar.getMenus().removeAll(space(),ecuSNMenu(cnt.ecuSN));
-                comDialog.setResult(ButtonType.CLOSE);
+                boolean diconnected = discnt.disConnect(serialPort);
+                mainMenuBar.getMenus().remove(5);
+                mainMenuBar.getMenus().remove(4);
+
+                if(comDialog.isShowing()) {
+                    comDialog.setResult(ButtonType.CLOSE);
+                }
                 isEcuConnected=false;
                 serialPort.closePort();
+                if(diconnected){
+                    sof(disconnect, "COMPORT disconnected Successfully", true);
+                }else {
+                    sof(disconnect, "Disconnected without ERCH Response", true);
+                }
+
 
             }
             else{
                 log.warn("Connection not Established");
-                sof("Disconnected", "Connection not established ", false);
+                sof(disconnect, "Connection not established ", false);
 
             }
 
@@ -198,13 +212,12 @@ public class Comport {
         return portNames;
     }
 
-    public SerialPort getConnectedPort(){
-        return this.serialPort;
+    public static SerialPort getConnectedPort(){
+        return serialPort;
     }
 
 
-
-    public static Menu space() {
+    public  Menu space() {
         /*
          space Menu is used to add space between all the other Menus and ecuSN menu
          */
@@ -217,16 +230,15 @@ public class Comport {
         return spacerMenu;
     }
 
-    public static Menu ecuSNMenu(String connectedto)
+    public  Menu ecuSNMenu()
     {
         /*
          ecuSN Menu is created to display the serial Number of ECU
          which we are connected to
          */
 
-        Menu cntTo = new Menu("Connected : " + connectedto);
+        Menu cntTo = new Menu("Connected : " + cnt.ecuSN);
         cntTo.setDisable(false);
-        cntTo.setStyle("-fx-opacity: 100;");
         return cntTo;
     }
 

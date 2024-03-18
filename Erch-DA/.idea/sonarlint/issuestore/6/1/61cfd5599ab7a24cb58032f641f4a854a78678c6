@@ -2,3 +2,5 @@
 u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8´»©…ä1
 W
 java:S1118":Add a private constructor to hide the implicit public one.(»¬Ç»8º»©…ä1
+L
+java:S1128"/Remove this unused import 'javafx.scene.Scene'.(Õü²8µ˜çşä1

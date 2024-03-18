@@ -1,7 +1,7 @@
 package desktop.app.erch;
 
 import desktop.app.erch.Connection.Comport;
-import desktop.app.erch.Helper.Display;
+import desktop.app.erch.RealTime.Dashboard;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
 import static desktop.app.erch.Helper.Common.erchIcon;
+import static desktop.app.erch.Helper.Common.setBackground;
+import static desktop.app.erch.Helper.Display.sof;
 
 public class Index extends Application {
 
@@ -29,6 +31,11 @@ public class Index extends Application {
     Image[] wallPapers;
     int currentImageIndex = 0;
     Comport envSetup = new Comport();
+    Dashboard realtime = new Dashboard();
+
+    String disconnect = "Disconnected";
+
+    Comport port = new Comport();
 
     @Override
     public void start(Stage indexStage) {
@@ -100,13 +107,24 @@ public class Index extends Application {
 
         };
         // Set initial background
-        setBackground(wallPapers[currentImageIndex]);
+        setBackground(wallPapers[currentImageIndex],indexLayout);
 
 
 
         /**••• Menuitem functionality Starts •••**/
 
 
+        //When clicked on Realtime Dashboard
+        item13.setOnAction(e -> {
+            if(port.isEcuConnected){
+                realtime.displayDashboard(port.getConnectedPort());
+            }
+            else {
+                log.warn("Connection not Established");
+                sof(disconnect, "Connection not established ", false);
+            }
+
+        });
 
         //When clicked on Environmental Setup
         item17.setOnAction(e -> {
@@ -135,7 +153,6 @@ public class Index extends Application {
         });
         imageTransitionThread.setDaemon(true); // Set the thread as a daemon
         imageTransitionThread.start();
-
 
 
         // add icon and title to Index Dialog
@@ -220,7 +237,7 @@ public class Index extends Application {
         // Set the action to be performed when the fade-out transition finishes
         fadeOutTransition.setOnFinished(event -> {
             // Set the new background image
-            setBackground(wallPapers[currentImageIndex]);
+            setBackground(wallPapers[currentImageIndex],indexLayout);
 
             // Create a new fade-in transition
             FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.25), indexLayout);
@@ -234,21 +251,7 @@ public class Index extends Application {
         // Start the fade-out transition
         fadeOutTransition.play();
     }
-    private void setBackground(Image image) {
-        /*
-        setBackground sets image for indexLayout
-        args    : Image    → Specifies the Image to be displayed on Background
-         */
 
-        BackgroundSize backgroundSize = new BackgroundSize(
-                BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
-
-        BackgroundImage bImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
-        Background bGround = new Background(bImg);
-
-        indexLayout.setBackground(bGround);
-    }
 
 
 

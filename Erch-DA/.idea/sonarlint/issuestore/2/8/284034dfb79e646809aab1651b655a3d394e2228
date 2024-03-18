@@ -1,9 +1,11 @@
 
 _
-java:S1659"BDeclare "item2" and all following declarations on a separate line.(¬üô8ËÆ…ä1
+java:S1659"BDeclare "item2" and all following declarations on a separate line.(¬üô8º–Ó‹å1
 e
-java:S1659"CDeclare "item12" and all following declarations on a separate line.(¬›“Ğıÿÿÿÿ8ÌÆ…ä1
-N
-java:S1602p",Remove useless curly braces around statement(õœ»ªşÿÿÿÿ8áÆ…ä1
-^
-java:S1128"<Remove this unused import 'desktop.app.erch.Helper.Display'.(ÅåÎòùÿÿÿÿ8Å¿Ö‘ä1
+java:S1659"CDeclare "item12" and all following declarations on a separate line.(¬›“Ğıÿÿÿÿ8º–Ó‹å1
+R
+java:S2209w"5Change this instance-reference to a static reference.(Ê˜˜Ø8—Ó‹å1
+W
+java:S2209x"5Change this instance-reference to a static reference.(îëúÖşÿÿÿÿ8—Ó‹å1
+O
+java:S1602‚",Remove useless curly braces around statement(õœ»ªşÿÿÿÿ8—Ó‹å1

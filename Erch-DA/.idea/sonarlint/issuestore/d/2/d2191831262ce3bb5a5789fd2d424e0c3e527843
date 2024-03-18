@@ -1,11 +1,11 @@
 
 q
-java:S1104"TMake erchIcon a static final constant or non-public and provide accessors if needed.(­³°“8‰†…ä1
+java:S1104"TMake erchIcon a static final constant or non-public and provide accessors if needed.(­³°“8‰†…ä1
 K
-java:S1444".Make this "public static erchIcon" field final(­³°“8‰†…ä1
+java:S1444".Make this "public static erchIcon" field final(­³°“8‰†…ä1
 u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8‰†…ä1
 \
-java:S1118":Add a private constructor to hide the implicit public one.(âŠ°ÿÿÿÿÿ8¦‰†…ä1
-L	java:S106"+Replace this use of System.out by a logger.(²‰Áşÿÿÿÿ8¨‰†…ä1
+java:S1118":Add a private constructor to hide the implicit public one.(âŠ°ÿÿÿÿÿ8˜ƒİ„å1
+L	java:S106"+Replace this use of System.out by a logger.(²‰Áşÿÿÿÿ8¨‰†…ä1
 G
-java:S2116"%Use "Arrays.toString(array)" instead.(²‰Áşÿÿÿÿ8¨‰†…ä1
+java:S2116"%Use "Arrays.toString(array)" instead.(²‰Áşÿÿÿÿ8¨‰†…ä1

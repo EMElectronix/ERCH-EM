@@ -12,7 +12,7 @@ public class Disconnect {
     String errorMessage = "Error";
     Logger log = LogManager.getLogger(Disconnect.class);
 
-    public void disConnect(SerialPort selectedPort){
+    public boolean disConnect(SerialPort selectedPort){
 
         try{
             boolean portOpened = selectedPort.openPort();
@@ -20,16 +20,16 @@ public class Disconnect {
                 Receiver disConn = new Receiver();
                 String data = disConn.receiveFrame(selectedPort,"Disconnection","a02",12,bDisConn(),log);
                 if(data.equals("88")){
-                    sof("Disconnected", "COM PORT disconnected Successfully", true);
+                    return true;
                 }else{
-                    sof("Disconnected", "Disconnected without ERCH Response", true);
+                    return false;
                 }
-
 
 
             }else{
                 log.error("Failed to Open Comport");
                 sof(errorMessage, "Failed to open COM port ❗", false);
+                return false;
             }
 
 
@@ -41,6 +41,7 @@ public class Disconnect {
         }
 
 
+        return false;
     }
 
 

@@ -4,6 +4,7 @@ module desktop.app.erch {
     requires com.fazecast.jSerialComm;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires eu.hansolo.medusa;
 
 
     opens desktop.app.erch to javafx.fxml;

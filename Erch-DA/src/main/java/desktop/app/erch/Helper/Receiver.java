@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static desktop.app.erch.Helper.CRC.calculateCRC;
+import static desktop.app.erch.Helper.Common.setComportParameters;
 import static desktop.app.erch.Helper.Display.sof;
 
 public class Receiver {
@@ -17,8 +18,7 @@ public class Receiver {
 
             log.info("COM port opened successfully: {}" , selectedPort.getSystemPortName());
 
-            selectedPort.setComPortParameters(9600,8,1,0);
-            selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 1000, 0);
+            setComportParameters(selectedPort);
 
             //Send the Connect frame
             selectedPort.writeBytes(sendFrame, sendFrame.length);

@@ -33,3 +33,11 @@ a
 .src/main/java/desktop/app/erch/Helper/CRC.java,2\f\2f384c6e02022513443852705588c660cd8b27f8
 c
 3src/main/java/desktop/app/erch/Helper/Receiver.java,1\1\1159824b117048f5900861d3b3a683f3eb294af7
+X
+(src/main/java/desktop/app/erch/Main.java,7\2\726cf3c2ea6512bafeb3fe797cfe13e9134b07f5
+`
+0src/main/java/desktop/app/erch/RealTime/LCD.java,0\a\0ad7e550d53df0c8b8b760fe252adca84ff36088
+g
+7src/main/java/desktop/app/erch/RealTime/Roundgauge.java,4\6\46d590ffbc1ddf7034a79fd14f2395f8bdf8fdda
+f
+6src/main/java/desktop/app/erch/Helper/DataProcess.java,a\6\a602f13bc4ba11c12edb8943ea456ceb3235f37b

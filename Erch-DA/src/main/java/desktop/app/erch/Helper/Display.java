@@ -48,9 +48,6 @@ public class Display {
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(erchIcon);
 
-        // Load CSS file
-        Scene scene = stage.getScene();
-        scene.getStylesheets().add(Display.class.getResource("/desktop/app/erch/css/Comport.css").toExternalForm());
 
         Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
 

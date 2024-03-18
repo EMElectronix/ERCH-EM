@@ -1,0 +1,30 @@
+/*******************--- CSS File for Dashboard.java ---*******************/
+
+.dialog-pane .label {
+   -fx-text-fill: white;
+   -fx-font-size: 18;
+   -fx-font-weight: bold;
+}
+
+.count-button{
+-fx-background-color: #F0D317;
+ -fx-text-fill: #FFFFFF;
+ -fx-font-weight: bold;
+ -fx-font-size: 18;
+
+}
+
+.count-button:hover{
+-fx-background-color: #FFDD00;
+ -fx-text-fill: #FFFFFF;
+ -fx-font-weight: bold;
+ -fx-font-size: 18;
+
+}
+
+.start-button{
+-fx-background-color: transparent;
+ -fx-text-fill: #FFFFFF;
+ -fx-font-weight: bold;
+
+}
