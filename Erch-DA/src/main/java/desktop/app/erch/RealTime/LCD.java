@@ -8,6 +8,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 public class LCD extends Region {
+    /*
+    Constructor to create LCD Gauge
+     */
     private  Gauge Speed;
     public LCD(String title, String subTitle, String unit, double MaxValue , LcdDesign lcdDesign, boolean thresholdVisible, double threshold, int Width) {
         initGraphics(title, subTitle, unit, MaxValue, lcdDesign, thresholdVisible, threshold,Width);

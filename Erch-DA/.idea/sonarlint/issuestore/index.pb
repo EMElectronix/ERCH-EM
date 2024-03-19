@@ -41,3 +41,7 @@ g
 7src/main/java/desktop/app/erch/RealTime/Roundgauge.java,4\6\46d590ffbc1ddf7034a79fd14f2395f8bdf8fdda
 f
 6src/main/java/desktop/app/erch/Helper/DataProcess.java,a\6\a602f13bc4ba11c12edb8943ea456ceb3235f37b
+k
+;src/main/java/desktop/app/erch/Helper/CustomTimePicker.java,9\c\9c8fac67f574a71eae7208aacd00ad1b7b10c2f6
+\
+,src/main/java/desktop/app/erch/ReadConf.java,2\4\243cd7f071a3515fbd8ae453808c6c5733aa2535

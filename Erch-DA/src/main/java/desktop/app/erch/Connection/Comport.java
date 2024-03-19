@@ -11,13 +11,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static desktop.app.erch.Helper.Common.erchIcon;
 import static desktop.app.erch.Helper.Display.sof;
 import static desktop.app.erch.Index.mainMenuBar;
 
 public class Comport {
-     Logger log = LogManager.getLogger(Comport.class);
+    Logger log = LogManager.getLogger(Comport.class);
     public static boolean isEcuConnected = false ;
     public static SerialPort serialPort = null;
     public Dialog<ButtonType> comDialog;
@@ -30,20 +31,21 @@ public class Comport {
 
     String disconnect = "Disconnected";
 
-    public void displayComport(Stage index) {
+    public void displayComport(Stage parent) {
 
          /*
         displayComport : Functionalities of Comport dialog is added
          */
 
         comDialog = new Dialog<>();
-        comDialog.getDialogPane().getStylesheets().add(getClass().getResource("/desktop/app/erch/css/Comport.css").toExternalForm());
+        comDialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource
+                ("/desktop/app/erch/css/Comport.css")).toExternalForm());
 
         comDialog.setTitle("ComPort");
 
         // Set the stage as a modal window
         comDialog.initModality(Modality.WINDOW_MODAL);
-        comDialog.initOwner(index);
+        comDialog.initOwner(parent);
 
         // Add icon
         Stage comportStage = (Stage) comDialog.getDialogPane().getScene().getWindow();

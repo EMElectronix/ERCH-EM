@@ -1,0 +1,131 @@
+/*******************--- CSS File for Read and Write RTC ---*******************/
+
+    .root {
+        -fx-font-weight: bold;
+    }
+
+    .dialog-pane {
+        -fx-background-color:  #005288; /* Set the background color of the title bar */
+    }
+
+
+    .dialog-pane .label {
+       -fx-text-fill: white; /* Set the background color of the title bar */
+       -fx-font-size: 18;
+    }
+
+    .dialog-pane .header-panel  {
+        -fx-background-color:#005288; /* Set the background color of the title bar */
+         -fx-text-fill: white; /* Set the text color of the header text */
+    }
+
+    .dialog-pane .header {
+     -fx-background-color:#005288; /* Set the background color of the title bar */
+     -fx-text-fill: white; /* Set the text color of the header text */
+
+    }
+
+    .dialog-pane .button-bar .button {
+        -fx-background-color: white; /* Set the background color of the buttons */
+        -fx-text-fill: black; /* Set the text color of the buttons */
+        -fx-background-radius: 20px;  /* Set the background radius */
+       -fx-alignment: CENTER; /* Align the text to the center */
+    }
+
+    .dialog-pane .button-bar .button:hover {
+        -fx-background-color: #005288; /* Set the background color of the buttons */
+        -fx-text-fill: white; /* Set the text color of the buttons */
+        -fx-border-color: white; /* Set the border color of the buttons */
+        -fx-border-radius: 20px;  /* Set the border radius */
+        -fx-alignment: CENTER; /* Align the text to the center */
+    }
+
+    .grid-pane .label {
+        -fx-text-fill: white; /* Set the text color of the labels */
+    }
+
+    * {
+      -fx-primary-color:  #005288;
+      -fx-secondary-color: #0070C0;
+      -fx-light-grey-color: #d1d1d1;
+      /*Set focus color*/
+      -fx-focus-color: -fx-secondary-color;
+
+    }
+
+    /*-----------------------------------------
+    Customize left and right arrow
+    -------------------------------------------*/
+    .date-picker-popup .spinner .button .left-arrow,
+    .date-picker-popup .spinner .button .right-arrow {
+      -fx-background-color: #FFFFFF;
+    }
+
+    .date-picker-popup .spinner .button:hover .left-arrow,
+    .date-picker-popup .spinner .button:hover .right-arrow {
+      -fx-background-color: -fx-primary-color;
+    }
+
+    /*-----------------------------------------
+    Customize the right button background color
+    -------------------------------------------*/
+
+
+
+    .date-picker .arrow-button {
+      -fx-background-color: -fx-primary-color;
+      -fx-background-radius: 0;
+    }
+
+    .date-picker .arrow-button:hover {
+      -fx-background-color: -fx-secondary-color;
+    }
+
+    .date-picker .arrow-button .arrow {
+      -fx-background-color: white;
+    }
+
+    /*-----------------------------------------
+    Customize popup content
+    -------------------------------------------*/
+    .date-picker .cell {
+      -fx-background-color: white;
+    }
+
+    .date-picker .cell:hover {
+      -fx-background-color: -fx-primary-color;
+    }
+
+    .date-picker .cell:focused {
+      -fx-background-color: -fx-primary-color;
+    }
+
+    /*-----------------------------------------
+    Customize the selected cell
+    -------------------------------------------*/
+    .date-picker .selected {
+      -fx-background-color: -fx-primary-color;
+      -fx-text-fill: white;
+    }
+
+    .date-picker .selected:focused {
+      -fx-background-color: -fx-primary-color;
+      -fx-text-fill: white;
+    }
+
+    .date-picker-popup {
+      -fx-border-color: transparent;
+    }
+
+    .date-picker-popup .month-year-pane {
+      -fx-background-color: -fx-primary-color;
+    }
+
+    .date-picker-popup .month-year-pane .label {
+      -fx-text-fill: white;
+    }
+
+    .date-picker-popup .week-number-cell {
+      -fx-text-fill: -fx-secondary-color;
+    }
+

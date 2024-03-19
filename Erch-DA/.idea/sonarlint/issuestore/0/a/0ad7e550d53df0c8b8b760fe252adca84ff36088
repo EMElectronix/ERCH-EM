@@ -1,11 +1,11 @@
 
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¶——
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¶——
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ºŒ¥ÿÿÿÿÿ
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ºŒ¥ÿÿÿÿÿ
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¶——
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¶——
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ºŒ¥ÿÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ºŒ¥ÿÿÿÿÿ
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÆÕ‰ûüÿÿÿÿ
-j	java:S116"PRename this field "Speed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö Äîÿÿÿÿÿ
-V	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(ù¶——
-V	java:S107"<Method has 8 parameters, which is greater than 7 authorized.(•ºŒ¥ÿÿÿÿÿ
+j	java:S116"PRename this field "Speed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö Äîÿÿÿÿÿ
+V	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(ù¶——
+V	java:S107"<Method has 8 parameters, which is greater than 7 authorized.(•ºŒ¥ÿÿÿÿÿ
 F
-java:S1172"+Remove this unused method parameter "unit".(•ºŒ¥ÿÿÿÿÿ
+java:S1172"+Remove this unused method parameter "unit".(•ºŒ¥ÿÿÿÿÿ

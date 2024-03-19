@@ -1,7 +1,6 @@
 package desktop.app.erch.RealTime;
 
 import com.fazecast.jSerialComm.SerialPort;
-import desktop.app.erch.Connection.Connect;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
 import eu.hansolo.medusa.LcdDesign;
@@ -68,8 +67,8 @@ public class Dashboard {
 
 
     public void displayDashboard (SerialPort selectedPort){
-        /*
-        displayDashboard : All Gauges, digital lcd, that represent Realtime are added
+        /***
+          displayDashboard : All Gauges, digital lcd, that represent Realtime are added
          */
 
 
@@ -284,11 +283,11 @@ public class Dashboard {
 
         VBox pressureDown = new VBox(-320);
         pressureDown.getChildren().addAll(aapGauge,pressureUP);
-        pressureDown.setMargin(aapGauge, new Insets(-200, 0, 0, 100));
+        VBox.setMargin(aapGauge, new Insets(-200, 0, 0, 100));
 
         StackPane finalpane1 = new StackPane(pressureDown,vsGauge);
-        finalpane1.setMargin(pressureDown, new Insets(350, 0, 0, 210));
-        finalpane1.setMargin(vsGauge, new Insets(100, 0, 100, 0));
+        StackPane.setMargin(pressureDown, new Insets(350, 0, 0, 210));
+        StackPane.setMargin(vsGauge, new Insets(100, 0, 100, 0));
         finalpane1.setPrefSize(570,550);
         finalpane1.setPadding(new Insets(0));
 
@@ -299,11 +298,11 @@ public class Dashboard {
 
         VBox tempDown = new VBox(-320);
         tempDown.getChildren().addAll(ch8Gauge,tempUP);
-        tempDown.setMargin(ch8Gauge, new Insets(-200, 0, 0, -100));
+        VBox.setMargin(ch8Gauge, new Insets(-200, 0, 0, -100));
 
         StackPane finalpane2 = new StackPane(tempDown,rpmGauge);
-        finalpane2.setMargin(tempDown, new Insets(350, 0, 0, 60));
-        finalpane2.setMargin(rpmGauge, new Insets(100, 0, 100, 173));
+        StackPane.setMargin(tempDown, new Insets(350, 0, 0, 60));
+        StackPane.setMargin(rpmGauge, new Insets(100, 0, 100, 173));
         finalpane2.setPrefSize(570,550);
         finalpane2.setPadding(new Insets(0));
 
@@ -325,17 +324,17 @@ public class Dashboard {
         GridPane finishedPane = new GridPane();
 
         finishedPane.getChildren().addAll(finalpane1,finalpane2,finalpane3,allOutput,finalpane4,baV,allInput,
-                                          dropdownButton,aatGauge,startStop);  //finalpane1,finalpane2,finalpane3
-        finishedPane.setMargin(finalpane1, new Insets(100, 100, 0, 910));
-        finishedPane.setMargin(finalpane2, new Insets(100, 910, 0, 100));
-        finishedPane.setMargin(finalpane3, new Insets(80, 670, 0, 675));
-        finishedPane.setMargin(allOutput,new Insets(0,0,-800,230));
-        finishedPane.setMargin(finalpane4, new Insets(500, 1350, -100, 30));
-        finishedPane.setMargin(baV, new Insets(10, 0, 0, 1200));
-        finishedPane.setMargin(allInput, new Insets(0, 0, 500, 450));
-        finishedPane.setMargin(dropdownButton, new Insets(0, 0, 500, 200));
-        finishedPane.setMargin(aatGauge, new Insets(540, 0, -540, 640));
-        finishedPane.setMargin(startStop, new Insets(0, 800, 500, 10));
+                                          dropdownButton,aatGauge,startStop);
+        GridPane.setMargin(finalpane1, new Insets(100, 100, 0, 910));
+        GridPane.setMargin(finalpane2, new Insets(100, 910, 0, 100));
+        GridPane.setMargin(finalpane3, new Insets(80, 670, 0, 675));
+        GridPane.setMargin(allOutput,new Insets(0,0,-800,230));
+        GridPane.setMargin(finalpane4, new Insets(500, 1350, -100, 30));
+        GridPane.setMargin(baV, new Insets(10, 0, 0, 1200));
+        GridPane.setMargin(allInput, new Insets(0, 0, 500, 450));
+        GridPane.setMargin(dropdownButton, new Insets(0, 0, 500, 200));
+        GridPane.setMargin(aatGauge, new Insets(540, 0, -540, 640));
+        GridPane.setMargin(startStop, new Insets(0, 800, 500, 10));
 
 
         dashLayout.setCenter(finishedPane);
@@ -358,6 +357,9 @@ public class Dashboard {
 
 
     public void realtimeStart( SerialPort serialPort) {
+        /*
+        realtimeStart sends frame and initiates serial communication
+         */
         try {
             boolean portOpened = serialPort.openPort();
             if (portOpened) {
@@ -365,32 +367,29 @@ public class Dashboard {
 
                 serialPort.writeBytes(bRealtimeStart(), bRealtimeStart().length);
 
-                RealtimeTask(serialPort);
+                realTimeTask(serialPort);
 
             } else {
                 log.error(failed);
                 sof(errorMessage, failed, false);
             }
         } catch (Exception connectionException) {
-            System.out.println("Error opening COM port: " + connectionException.getMessage());
-            connectionException.printStackTrace(); // Print the stack trace for detailed information
+            log.error("Error opening COM port: {}" ,connectionException.getMessage());
             sof(errorMessage, "Error opening COM port:", false);
         }
     }
 
     public void realtimeStop( SerialPort serialPort ) {
+        /*
+        realtimeStart sends stop frame to stops serial communication
+         */
         try {
-            if (true) {
-                setComportParameters(serialPort);
+            setComportParameters(serialPort);
 
-                serialPort.writeBytes(bRealtimeStop(), bRealtimeStop().length);
+            serialPort.writeBytes(bRealtimeStop(), bRealtimeStop().length);
 
-                serialPort.closePort();
+            serialPort.closePort();
 
-            } else {
-                log.fatal(failed);
-                sof(errorMessage, failed, false);
-            }
         } catch (Exception connectionException) {
             log.error("Error opening COM port: {}" , connectionException.getMessage());
             connectionException.printStackTrace(); // Print the stack trace for detailed information
@@ -398,7 +397,7 @@ public class Dashboard {
         }
     }
 
-    public void RealtimeTask( SerialPort serialPort) {
+    public void realTimeTask( SerialPort serialPort) {
 
         /*
         RealtimeTask is used to receive frames from ECU
@@ -406,8 +405,6 @@ public class Dashboard {
 
         // Initialize a timer for unexpected stop detection
         final Timer[] timer = {new Timer()};
-        long timeoutDuration = 5000; // Set the timeout duration in milliseconds (adjust as needed)
-
 
         Task<Void> backgroundTask = new Task<>() {
             @Override
@@ -444,8 +441,8 @@ public class Dashboard {
                             }}
                     }, 20000); // 20 seconds timeout
 
-                    if  (containsSequence(realtimeResponse, new byte[]{0x0D,0x0A,0x0D})) {
-                        log.info("Raltime Received Response :");
+                    if  (containsSequence(realtimeResponse, new byte[]{0x0D,0x0A,0x0D},log)) {
+                        log.info("Realtime Received Response :");
                         for (byte b : realtimeResponse) {
                             System.out.printf("%02X ", b);
                         }
@@ -459,7 +456,7 @@ public class Dashboard {
                         realtimeBuffer.reset();
                         rCounter.addAndGet(1);
 
-                        System.out.println("Buffer is cleared ---" + "Response Length: " + realtimeResponse.length + " ---Datacount: " + rCounter );
+                        log.info("Buffer is cleared --- Response Length: {}  --- Datacount: {}", realtimeResponse.length , rCounter );
                     }
 
                 }
@@ -485,7 +482,7 @@ public class Dashboard {
         String dataString = new String(response, StandardCharsets.UTF_8);
 
         // Print raw data for inspection
-        System.out.println("Raw Data: " + dataString);
+        log.info("Raw Data: {}" , dataString);
 
         // Define the lengths of each field
         int[] fieldLengths = {
@@ -575,8 +572,7 @@ public class Dashboard {
         statusView.setFitHeight(70);
 
         Label name = new Label(statusName);
-        name.getStylesheets().add();
-        name.setStyle("-fx-text-fill: white;-fx-font-weight: bold;"); FLAG
+        name.setStyle("-fx-text-fill: white;-fx-font-weight: bold;");
         vbox.getChildren().addAll(statusView,name);
 
         return vbox;
@@ -677,8 +673,7 @@ public class Dashboard {
         VBox container = (VBox) statusButton.getGraphic();
         Label nameLabel = (Label) container.getChildren().get(1);
         String name = nameLabel.getText();
-        String onOrOff = name.equals("Stop") ? "ON" : "OFF";
-        return onOrOff;
+        return name.equals("Stop") ? "ON" : "OFF";
     }
 
 

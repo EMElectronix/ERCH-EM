@@ -14,7 +14,12 @@ import static desktop.app.erch.Helper.Display.sof;
 
 public class Receiver {
 
-    public String receiveFrame(SerialPort selectedPort,String operation, String funCode, int expectedLength,byte[] sendFrame,Logger log){
+    public String receiveFrame(SerialPort selectedPort,String operation, String funCode, int expectedLength,
+                               byte[] sendFrame,Logger log){
+
+        /*
+        receiveFrame sends the frame and processes the response
+         */
 
             log.info("COM port opened successfully: {}" , selectedPort.getSystemPortName());
 
@@ -87,6 +92,44 @@ public class Receiver {
                 log.error("{} Failed",operation);
                 return null;
             }
+
+    }
+
+
+    public String receiveFrame(SerialPort selectedPort,String operation, String funCode, int expectedLength,
+                               String finalFrame,Logger log){
+
+        /*
+        receiveFrame processes the data and calls other receiveFrame
+         */
+
+        String cS1 = finalFrame.substring(finalFrame.length()-4, finalFrame.length()-2);
+        String cS2 = finalFrame.substring(finalFrame.length()-2, finalFrame.length()-0);
+
+        byte[] sendFrame = finalFrame.getBytes();
+
+        // Parse hexadecimal strings to integers
+        int intValueCS1 = Integer.parseInt(cS1, 16);
+        int intValueCS2 = Integer.parseInt(cS2, 16);
+
+        // Convert integers to bytes
+        byte[] cs1 = {(byte) intValueCS1};
+        byte[] cs2 = {(byte) intValueCS2};
+
+        // Send the bytes before the last four
+        selectedPort.writeBytes(Arrays.copyOfRange(sendFrame, 0, sendFrame.length - 4),
+                sendFrame.length - 4);
+
+        // Send the first pair
+        selectedPort.writeBytes(cs1,1);
+        // Send the second pair
+        selectedPort.writeBytes(cs2,1);
+
+        log.info("Sent : {} {} {}",Arrays.toString(sendFrame),
+                Arrays.toString(cs1), Arrays.toString(cs2));
+
+        return receiveFrame(selectedPort,operation,funCode,expectedLength,sendFrame,log);
+
 
     }
 

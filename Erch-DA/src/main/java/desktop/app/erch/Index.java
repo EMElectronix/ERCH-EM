@@ -1,6 +1,7 @@
 package desktop.app.erch;
 
 import desktop.app.erch.Connection.Comport;
+import desktop.app.erch.RTC.WriteRTC;
 import desktop.app.erch.RealTime.Dashboard;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -16,6 +17,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
+import java.util.Objects;
+
 import static desktop.app.erch.Helper.Common.erchIcon;
 import static desktop.app.erch.Helper.Common.setBackground;
 import static desktop.app.erch.Helper.Display.sof;
@@ -26,16 +29,21 @@ public class Index extends Application {
     BorderPane indexLayout = new BorderPane();
     public static final MenuBar mainMenuBar = new MenuBar();
 
-    MenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9, item10;
-    MenuItem item11, item12, item13, item14, item15, item16, item17,item18,item19;
+    public static MenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9, item10;
+    public static MenuItem item11, item12, item13, item14, item15, item16, item17,item18,item19;
     Image[] wallPapers;
     int currentImageIndex = 0;
     Comport envSetup = new Comport();
     Dashboard realtime = new Dashboard();
 
+    WriteRTC rtcEdit = new WriteRTC();
+
+    ReadConf confRead = new ReadConf();
+
     String disconnect = "Disconnected";
 
-    Comport port = new Comport();
+    String cne = "Connection not Established";
+
 
     @Override
     public void start(Stage indexStage) {
@@ -100,10 +108,10 @@ public class Index extends Application {
 
 
         wallPapers = new Image[]{
-                new Image(getClass().getResourceAsStream("/desktop/app/erch/Images/Tatra.png")),
-                new Image(getClass().getResourceAsStream("/desktop/app/erch/Images/TatraSnow.png")),
-                new Image(getClass().getResourceAsStream("/desktop/app/erch/Images/tatra.jpg")),
-                new Image(getClass().getResourceAsStream("/desktop/app/erch/Images/TatraDesert.png"))
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/desktop/app/erch/Images/Tatra.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/desktop/app/erch/Images/TatraSnow.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/desktop/app/erch/Images/tatra.jpg"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/desktop/app/erch/Images/TatraDesert.png")))
 
         };
         // Set initial background
@@ -113,23 +121,45 @@ public class Index extends Application {
 
         /**••• Menuitem functionality Starts •••**/
 
+        //When clicked on set Date and Time of RTC
+        item1.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                rtcEdit.displayWriteRTC(Comport.getConnectedPort(),indexStage);
+            }
+            else {
+                log.warn(cne);
+                sof(disconnect, cne, false);
+            }
+
+        });
+
+        //When clicked on ERCH Read Configuration
+        item12.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                confRead.displayConfig(Comport.getConnectedPort());
+            }
+            else {
+                log.warn(cne);
+                sof(disconnect, cne, false);
+            }
+
+        });
+
 
         //When clicked on Realtime Dashboard
         item13.setOnAction(e -> {
-            if(port.isEcuConnected){
-                realtime.displayDashboard(port.getConnectedPort());
+            if(Comport.isEcuConnected){
+                realtime.displayDashboard(Comport.getConnectedPort());
             }
             else {
-                log.warn("Connection not Established");
-                sof(disconnect, "Connection not established ", false);
+                log.warn(cne);
+                sof(disconnect, cne, false);
             }
 
         });
 
         //When clicked on Environmental Setup
-        item17.setOnAction(e -> {
-         envSetup.displayComport(indexStage);
-        });
+        item17.setOnAction(e -> envSetup.displayComport(indexStage));
 
 
         /**--- Menuitem functionality Ends ---**/
@@ -260,3 +290,30 @@ public class Index extends Application {
     }
 
 }
+
+
+
+
+/*****
+
+
+,------.                        ,--.                        ,--.
+|  .-.  \  ,---.,--.  ,--.,---. |  | ,---.  ,---.  ,---.  ,-|  |
+|  |  \  :| .-. :\  `'  /| .-. :|  || .-. || .-. || .-. :' .-. |
+|  '--'  /\   --. \    / \   --.|  |' '-' '| '-' '\   --.\ `-' |
+`-------'  `----'  `--'   `----'`--' `---' |  |-'  `----' `---'
+                                           `--'
+,--.
+|  |-.,--. ,--.
+| .-. '\  '  /
+| `-' | \   '
+ `---'.-'  /
+      `---'
+
+,------.          ,--.          ,--.  ,--.
+|  .--. ',--,--.  `--' ,--,--.,-'  '-.|  ,---.
+|  '--'.' ,-.  |  ,--.' ,-.  |'-.  .-'|  .-.  |
+|  |\  \\ '-'  |  |  |\ '-'  |  |  |  |  | |  |
+`--' '--'`--`--'.-'  / `--`--'  `--'  `--' `--'
+                '---'
+ *****/

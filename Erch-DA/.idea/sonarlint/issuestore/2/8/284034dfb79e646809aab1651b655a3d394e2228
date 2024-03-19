@@ -1,11 +1,119 @@
 
+n
+java:S1104 "QMake item1 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item2 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item3 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item4 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item5 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item6 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item7 a static final constant or non-public and provide accessors if needed.(º‹Ş±8õÜ´¶å1
+n
+java:S1104 "QMake item8 a static final constant or non-public and provide accessors if needed.(º‹Ş±8öÜ´¶å1
+n
+java:S1104 "QMake item9 a static final constant or non-public and provide accessors if needed.(º‹Ş±8öÜ´¶å1
+o
+java:S1104 "RMake item10 a static final constant or non-public and provide accessors if needed.(º‹Ş±8öÜ´¶å1
+o
+java:S1104!"RMake item11 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item12 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item13 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item14 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item15 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item16 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item17 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item18 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+o
+java:S1104!"RMake item19 a static final constant or non-public and provide accessors if needed.(ÌˆªÉ8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item1" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item2" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item3" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item4" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item5" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item6" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item7" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item8" field final(º‹Ş±8öÜ´¶å1
+H
+java:S1444 "+Make this "public static item9" field final(º‹Ş±8öÜ´¶å1
+I
+java:S1444 ",Make this "public static item10" field final(º‹Ş±8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item11" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item12" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item13" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item14" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item15" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item16" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item17" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item18" field final(ÌˆªÉ8÷Ü´¶å1
+I
+java:S1444!",Make this "public static item19" field final(ÌˆªÉ8÷Ü´¶å1
 _
-java:S1659"BDeclare "item2" and all following declarations on a separate line.(¬üô8º–Ó‹å1
-e
-java:S1659"CDeclare "item12" and all following declarations on a separate line.(¬›“Ğıÿÿÿÿ8º–Ó‹å1
-R
-java:S2209w"5Change this instance-reference to a static reference.(Ê˜˜Ø8—Ó‹å1
-W
-java:S2209x"5Change this instance-reference to a static reference.(îëúÖşÿÿÿÿ8—Ó‹å1
-O
-java:S1602‚",Remove useless curly braces around statement(õœ»ªşÿÿÿÿ8—Ó‹å1
+java:S1659 "BDeclare "item2" and all following declarations on a separate line.(º‹Ş±8—ŒÇ´å1
+`
+java:S1659!"CDeclare "item12" and all following declarations on a separate line.(ÌˆªÉ8—ŒÇ´å1
+X
+java:S2696D"6Make the enclosing method "static" or remove this set.(ñÌªûüÿÿÿÿ8§İ´¶å1
+X
+java:S2696E"6Make the enclosing method "static" or remove this set.(Õœ¼Úüÿÿÿÿ8§İ´¶å1
+X
+java:S2696F"6Make the enclosing method "static" or remove this set.(¸÷¢‹şÿÿÿÿ8§İ´¶å1
+X
+java:S2696G"6Make the enclosing method "static" or remove this set.(ªÍ¼Ãşÿÿÿÿ8½İ´¶å1
+S
+java:S2696H"6Make the enclosing method "static" or remove this set.(šŸÿá8½İ´¶å1
+X
+java:S2696I"6Make the enclosing method "static" or remove this set.(º‚Øšşÿÿÿÿ8¾İ´¶å1
+S
+java:S2696J"6Make the enclosing method "static" or remove this set.(ãÏú8¾İ´¶å1
+X
+java:S2696K"6Make the enclosing method "static" or remove this set.(î‹¡€üÿÿÿÿ8¾İ´¶å1
+X
+java:S2696L"6Make the enclosing method "static" or remove this set.(ÆÖ¿›øÿÿÿÿ8¿İ´¶å1
+X
+java:S2696M"6Make the enclosing method "static" or remove this set.(šñúßşÿÿÿÿ8¿İ´¶å1
+X
+java:S2696P"6Make the enclosing method "static" or remove this set.(”Åğ„ùÿÿÿÿ8¿İ´¶å1
+S
+java:S2696Q"6Make the enclosing method "static" or remove this set.(ÿ´Ù8Àİ´¶å1
+X
+java:S2696R"6Make the enclosing method "static" or remove this set.( Åô„ÿÿÿÿÿ8Àİ´¶å1
+X
+java:S2696S"6Make the enclosing method "static" or remove this set.(½’ê®şÿÿÿÿ8Àİ´¶å1
+X
+java:S2696U"6Make the enclosing method "static" or remove this set.(äÅ›Şşÿÿÿÿ8Àİ´¶å1
+X
+java:S2696Y"6Make the enclosing method "static" or remove this set.(Ø¹Šüúÿÿÿÿ8Àİ´¶å1
+S
+java:S2696Z"6Make the enclosing method "static" or remove this set.(¯‰š8Áİ´¶å1
+S
+java:S2696]"6Make the enclosing method "static" or remove this set.(í€ËŠ8Áİ´¶å1
+X
+java:S2696^"6Make the enclosing method "static" or remove this set.(ç°Äûÿÿÿÿ8Áİ´¶å1

@@ -1,4 +1,6 @@
 
-n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(×ýù{
-W
-java:S2094"BRemove this empty class, write its code or make it an "interface".(¼å½#
+h
+java:S2184Ä"ECast one of the operands of this subtraction operation to a "double".(ýø™öÿÿÿÿÿ8³¤Øµå1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(×ýù{8´¤Øµå1
+n
+java:S3776$"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(Ûç€,8Í¤Øµå1
