@@ -20,11 +20,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.Objects;
 
 
+import static desktop.app.erch.Helper.Common.*;
 import static desktop.app.erch.Helper.Display.sof;
 import static desktop.app.erch.Helper.Frames.bRTCread;
 
 public class ReadRTC extends Dialog<String> {
-    String errorMessage = "Error";
+
     String data;
 
     Label dateLabel;
@@ -34,15 +35,15 @@ public class ReadRTC extends Dialog<String> {
 
 
     public ReadRTC(SerialPort selectedPort, Stage parent, Logger log) {
-        /*
+        /***
         ReadRTC is used to read the date and time from erch ECU
          */
 
         try {
             boolean portOpened = selectedPort.openPort();
             if (portOpened) {
-                Receiver conn = new Receiver();
-                data = conn.receiveFrame(selectedPort, "RTC Read", "a03", 23, bRTCread(), log);
+                Receiver rtc = new Receiver();
+                data = rtc.receiveFrame(selectedPort, "RTC Read", "a03", 23, bRTCread(), log);
                 if (data != null) {
 
                     getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource
@@ -74,6 +75,7 @@ public class ReadRTC extends Dialog<String> {
 
                     // Set result converter for OK button
                     setResultConverter(dialogButton -> {
+                        selectedPort.closePort();
                         String result;
                         if (dialogButton == okButton) {
                             result = "ok";
@@ -103,15 +105,9 @@ public class ReadRTC extends Dialog<String> {
                     gridPane.setHgap(15);
                     gridPane.setVgap(10); // Adjust vertical gap
                     gridPane.setAlignment(Pos.CENTER);
+                    gridPane.add(dateLabel, 0, 0);
+                    gridPane.add(analogClock, 0, 1);
 
-
-                    if (timeLabel!=null) {
-                        // Add the labels to the grid
-                        gridPane.add(dateLabel, 0, 0);
-                        gridPane.add(analogClock, 0, 1);  // Analog clock in the second row, first column
-                    } else {
-                        gridPane.add(errorLabel, 0, 0);
-                    }
 
                     // Add the grid to the dialog pane
                     getDialogPane().setContent(gridPane);
@@ -121,6 +117,7 @@ public class ReadRTC extends Dialog<String> {
                     // Add a close request event handler to handle "X" button click
                     Stage rtcStage = (Stage) getDialogPane().getScene().getWindow();
                     rtcStage.setOnCloseRequest(event -> {
+                        selectedPort.closePort();
                         String result = "ok";
                         close(); // Close the current dialog
                         setResult(result);
@@ -128,22 +125,15 @@ public class ReadRTC extends Dialog<String> {
 
 
                 } else {
-                    log.fatal("Read RTC Date and Time Failed");
-                    sof(errorMessage, "Read RTC Date and Time Failed❗", false);
-
+                    fatal("Read RTC Date and Time",log);
                 }
 
-
             } else {
-                log.error("Failed to Open Comport");
-                sof(errorMessage, "Failed to open COM port ❗", false);
-
+                failed(log);
             }
 
-        } catch (Exception connectionException) {
-            log.error("Error opening COM port: {}", connectionException.getMessage());
-            sof(errorMessage, "Error opening COM port ❗", false);
-
+        } catch (Exception e) {
+            error(e,log);
         }
 
 

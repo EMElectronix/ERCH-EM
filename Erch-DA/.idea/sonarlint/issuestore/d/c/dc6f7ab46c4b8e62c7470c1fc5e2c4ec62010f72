@@ -1,4 +1,4 @@
 
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é‹¶º8žê¿ÿä1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é‹¶º8¹Í·Óå1
 c
-java:S1126"AReplace this if-then-else statement by a single return statement.(ŒšêËþÿÿÿÿ8ÄŒÊÿä1
+java:S1126"AReplace this if-then-else statement by a single return statement.(ŒšêËþÿÿÿÿ8¿Í·Óå1

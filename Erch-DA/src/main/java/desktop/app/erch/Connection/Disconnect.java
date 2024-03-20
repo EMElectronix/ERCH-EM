@@ -5,11 +5,10 @@ import desktop.app.erch.Helper.Receiver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static desktop.app.erch.Helper.Display.sof;
+import static desktop.app.erch.Helper.Common.*;
 import static desktop.app.erch.Helper.Frames.bDisConn;
 
 public class Disconnect {
-    String errorMessage = "Error";
     Logger log = LogManager.getLogger(Disconnect.class);
 
     public boolean disConnect(SerialPort selectedPort){
@@ -27,17 +26,14 @@ public class Disconnect {
 
 
             }else{
-                log.error("Failed to Open Comport");
-                sof(errorMessage, "Failed to open COM port ❗", false);
+                failed(log);
                 return false;
             }
 
 
         }
-        catch(Exception disconnectionException){
-            log.error("Error opening COM port: {}" , disconnectionException.getMessage());
-            sof(errorMessage, "Error opening COM port ❗", false);
-
+        catch(Exception e){
+            error(e,log);
         }
 
 

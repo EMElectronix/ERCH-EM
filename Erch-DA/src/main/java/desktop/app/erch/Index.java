@@ -1,8 +1,10 @@
 package desktop.app.erch;
 
 import desktop.app.erch.Connection.Comport;
+import desktop.app.erch.PPRVS.WritePPR;
 import desktop.app.erch.RTC.WriteRTC;
 import desktop.app.erch.RealTime.Dashboard;
+import desktop.app.erch.Sampling.WriteSampling;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,8 +31,8 @@ public class Index extends Application {
     BorderPane indexLayout = new BorderPane();
     public static final MenuBar mainMenuBar = new MenuBar();
 
-    public static MenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9, item10;
-    public static MenuItem item11, item12, item13, item14, item15, item16, item17,item18,item19;
+    MenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9, item10;
+    MenuItem item11, item12, item13, item14, item15, item16, item17,item18,item19;
     Image[] wallPapers;
     int currentImageIndex = 0;
     Comport envSetup = new Comport();
@@ -38,11 +40,11 @@ public class Index extends Application {
 
     WriteRTC rtcEdit = new WriteRTC();
 
+    WriteSampling srEdit = new WriteSampling();
+
     ReadConf confRead = new ReadConf();
 
-    String disconnect = "Disconnected";
-
-    String cne = "Connection not Established";
+    WritePPR pprEdit = new WritePPR();
 
 
     @Override
@@ -127,11 +129,37 @@ public class Index extends Application {
                 rtcEdit.displayWriteRTC(Comport.getConnectedPort(),indexStage);
             }
             else {
-                log.warn(cne);
-                sof(disconnect, cne, false);
+               disconnected();
             }
 
         });
+
+
+
+
+        //When clicked on Change Sampling Rate
+        item4.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                srEdit.displayWriteSampling(Comport.getConnectedPort(),indexStage);
+            }
+            else {
+                disconnected();
+            }
+
+        });
+
+        //When clicked on Change Sampling Rate
+        item5.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                pprEdit.displayWritePPR(Comport.getConnectedPort(),indexStage);
+            }
+            else {
+                disconnected();
+            }
+
+        });
+
+
 
         //When clicked on ERCH Read Configuration
         item12.setOnAction(e -> {
@@ -139,8 +167,7 @@ public class Index extends Application {
                 confRead.displayConfig(Comport.getConnectedPort());
             }
             else {
-                log.warn(cne);
-                sof(disconnect, cne, false);
+                disconnected();
             }
 
         });
@@ -152,8 +179,7 @@ public class Index extends Application {
                 realtime.displayDashboard(Comport.getConnectedPort());
             }
             else {
-                log.warn(cne);
-                sof(disconnect, cne, false);
+                disconnected();
             }
 
         });
@@ -280,6 +306,11 @@ public class Index extends Application {
 
         // Start the fade-out transition
         fadeOutTransition.play();
+    }
+
+    void disconnected(){
+        log.warn("Connection not Established");
+        sof("Disconnected", "Connection not Established", false);
     }
 
 

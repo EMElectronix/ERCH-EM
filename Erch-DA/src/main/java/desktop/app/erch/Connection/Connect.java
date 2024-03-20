@@ -5,6 +5,8 @@ import desktop.app.erch.Helper.Receiver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static desktop.app.erch.Helper.Common.error;
+import static desktop.app.erch.Helper.Common.failed;
 import static desktop.app.erch.Helper.Display.sof;
 import static desktop.app.erch.Helper.Frames.bConn;
 
@@ -49,14 +51,12 @@ public class Connect {
 
 
                   }else{
-                      log.error("Failed to Open Comport");
-                      sof(errorMessage, "Failed to open COM port ❗", false);
+                      failed(log);
                       return false;
                   }
 
-              }catch (Exception connectionException){
-                  log.error("Error opening COM port: {}" , connectionException.getMessage());
-                  sof(errorMessage, "Error opening COM port ❗", false);
+              }catch (Exception e){
+                  error(e,log);
                   return false;
               }
 

@@ -1,6 +1,6 @@
 
 u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(×ýù{8Ù¼¶±å1
 t
-java:S3776 "RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(èüÒ€øÿÿÿÿ8î¼¶±å1
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(èüÒ€øÿÿÿÿ8î¼¶±å1
 N
-java:S1602>",Remove useless curly braces around statement(ÓÇ˜Éýÿÿÿÿ8ñ¼¶±å1
+java:S1602=",Remove useless curly braces around statement(ÓÇ˜Éýÿÿÿÿ8ñ¼¶±å1

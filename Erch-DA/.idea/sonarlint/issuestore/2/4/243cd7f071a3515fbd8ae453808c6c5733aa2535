@@ -1,3 +1,5 @@
 
-\
-java:S1128":Remove this unused import 'desktop.app.erch.RTC.WriteRTC'.(õåÄøÿÿÿÿÿ8½­Ó¶å1
+k
+java:S1192b"IDefine a constant instead of duplicating this literal "previous" 3 times.(öîØ¦ûÿÿÿÿ8ØíÆİå1
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(µø´8ğíÆİå1

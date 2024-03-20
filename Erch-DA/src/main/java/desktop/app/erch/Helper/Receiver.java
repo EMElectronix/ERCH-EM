@@ -29,7 +29,7 @@ public class Receiver {
             selectedPort.writeBytes(sendFrame, sendFrame.length);
 
             int responseLength = expectedLength;
-            byte[] connectResponse = new byte[responseLength];
+            byte[] erchResponse = new byte[responseLength];
 
 
             // Create a new timer for each connection attempt
@@ -59,28 +59,29 @@ public class Receiver {
                     break; // Exit the loop
                 }
 
-                connectResponse[i] = responsePart[0];
+                erchResponse[i] = responsePart[0];
             }
             timer.cancel(); // Cancel the timer
 
             //Print the full Received Response
             log.info("\n{} Received Response :",operation);
-            for (byte b : connectResponse) {
+            for (byte b : erchResponse) {
                 System.out.printf(String.format("%02X ", b));
             }
             System.out.println(" \n ");
 
 
             // Compare Received CRC with Calculated CRC
-            int receivedCRC = (connectResponse[connectResponse.length - 4] & 0xFF) |
-                    ((connectResponse[connectResponse.length - 5] & 0xFF) << 8);
-            int calculatedCRC = calculateCRC(Arrays.copyOf(connectResponse,
-                    connectResponse.length - 5));
+            int receivedCRC = (erchResponse[erchResponse.length - 4] & 0xFF) |
+                    ((erchResponse[erchResponse.length - 5] & 0xFF) << 8);
+            int calculatedCRC = calculateCRC(Arrays.copyOf(erchResponse,
+                    erchResponse.length - 5));
 
             log.info("Rcrc : {}  Ccrc : {}",receivedCRC,calculatedCRC);
-            String responseString = new String(connectResponse, StandardCharsets.UTF_8);
+            String responseString = new String(erchResponse, StandardCharsets.UTF_8);
             String fC = responseString.substring(0,3);
-            String data = responseString.substring(5,responseString.length()-5);
+            int numBytes = Integer.parseInt(responseString.substring(3,5));
+            String data = responseString.substring(5,numBytes+5);
             log.info("DATA : {}",data);
 
             // Verify and return the data
@@ -89,7 +90,7 @@ public class Receiver {
                 return data;
 
             }else{
-                log.error("{} Failed",operation);
+                log.error("{} Failed\n CRC or Function Code mismatch",operation);
                 return null;
             }
 

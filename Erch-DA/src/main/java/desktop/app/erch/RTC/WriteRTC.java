@@ -26,7 +26,6 @@ import static desktop.app.erch.Helper.Display.sof;
 public class WriteRTC {
     Dialog<ButtonType> writeDialog;
 
-    String errorMessage = "Error";
     Logger log = LogManager.getLogger(WriteRTC.class);
 
     public void displayWriteRTC(SerialPort selectedPort , Stage parent){
@@ -150,20 +149,18 @@ public class WriteRTC {
                                         "\n And"+"\n Time: " + selectedTime.toString() +"\n RTC has been set Successfully",
                                         true);
                             }
-                            else{
-                                log.fatal("RTC Write Failed");
-                                sof("RTC Write Failed", "RTC Write failed", false);
+                            else {
+                                fatal("Write RTC",log);
                             }
 
+                        } else {
+                            failed(log);
                         }
-                        else{
-                        log.error("Failed to Open Comport");
-                        sof(errorMessage, "Failed to open COM port ❗", false);
-                    }}
-                    catch (Exception connectionException){
-                        log.error("Error opening COM port: {}" , connectionException.getMessage());
-                        sof(errorMessage, "Error opening COM port ❗", false);
+
+                    } catch (Exception e) {
+                        error(e,log);
                     }
+
                 }
 
 

@@ -1,8 +1,10 @@
 package desktop.app.erch;
 
 import com.fazecast.jSerialComm.SerialPort;
+import desktop.app.erch.PPRVS.ReadPPR;
 import desktop.app.erch.RTC.ReadRTC;
 import desktop.app.erch.RTC.WriteRTC;
+import desktop.app.erch.Sampling.ReadSampling;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,7 +20,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 
 import static desktop.app.erch.Helper.Common.erchIcon;
-import static desktop.app.erch.Index.item12;
 
 public class ReadConf {
 
@@ -95,7 +96,37 @@ public class ReadConf {
 
             result.ifPresent(finalOutput -> {
                 if(finalOutput.equals("previous")) {
-                    item12.fire();
+                    displayConfig(selectedPort);
+                }else{
+                    if(confDialog.isShowing()){
+                        confDialog.close();
+                    }
+                }
+            });
+        });
+
+        samplingButtonNode.setOnAction(e -> {
+            ReadSampling srRead = new ReadSampling(selectedPort,confStage,log);
+            Optional<String> result = srRead.showAndWait();
+
+            result.ifPresent(finalOutput -> {
+                if(finalOutput.equals("previous")) {
+                    displayConfig(selectedPort);
+                }else{
+                    if(confDialog.isShowing()){
+                        confDialog.close();
+                    }
+                }
+            });
+        });
+
+        pprButtonNode.setOnAction(e -> {
+            ReadPPR pprRead = new ReadPPR(selectedPort,confStage,log);
+            Optional<String> result = pprRead.showAndWait();
+
+            result.ifPresent(finalOutput -> {
+                if(finalOutput.equals("previous")) {
+                    displayConfig(selectedPort);
                 }else{
                     if(confDialog.isShowing()){
                         confDialog.close();
