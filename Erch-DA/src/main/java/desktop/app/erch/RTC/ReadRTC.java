@@ -21,7 +21,6 @@ import java.util.Objects;
 
 
 import static desktop.app.erch.Helper.Common.*;
-import static desktop.app.erch.Helper.Display.sof;
 import static desktop.app.erch.Helper.Frames.bRTCread;
 
 public class ReadRTC extends Dialog<String> {
@@ -30,8 +29,6 @@ public class ReadRTC extends Dialog<String> {
 
     Label dateLabel;
     private Label timeLabel;
-
-    Label errorLabel;
 
 
     public ReadRTC(SerialPort selectedPort, Stage parent, Logger log) {
@@ -96,9 +93,6 @@ public class ReadRTC extends Dialog<String> {
 
                     // Create labels to display date and time
                     dateLabel = new Label("\uD83D\uDCC6   Date: " + day + "-" + month + "-20" + year);
-
-                    errorLabel = new Label("Date and Time \nUnavailable");
-
 
                     // Add labels to a GridPane
                     GridPane gridPane = new GridPane();

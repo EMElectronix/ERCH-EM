@@ -1,5 +1,7 @@
 
 k
-java:S1192b"IDefine a constant instead of duplicating this literal "previous" 3 times.(öîØ¦ûÿÿÿÿ8ØíÆİå1
+java:S1192g"IDefine a constant instead of duplicating this literal "previous" 5 times.(öîØ¦ûÿÿÿÿ8Óô€‡æ1
 o
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(µø´8ğíÆİå1
+java:S3776 "RRefactor this method to reduce its Cognitive Complexity from 40 to the 15 allowed.(µø´8ƒõ€‡æ1
+\
+java:S1128":Remove this unused import 'desktop.app.erch.RTC.WriteRTC'.(õåÄøÿÿÿÿÿ8øõ€‡æ1

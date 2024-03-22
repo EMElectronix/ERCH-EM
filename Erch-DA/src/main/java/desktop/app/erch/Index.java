@@ -1,9 +1,11 @@
 package desktop.app.erch;
 
 import desktop.app.erch.Connection.Comport;
+import desktop.app.erch.Nonc.WriteNonc;
 import desktop.app.erch.PPRVS.WritePPR;
 import desktop.app.erch.RTC.WriteRTC;
 import desktop.app.erch.RealTime.Dashboard;
+import desktop.app.erch.SSource.WritesSource;
 import desktop.app.erch.Sampling.WriteSampling;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -45,6 +47,10 @@ public class Index extends Application {
     ReadConf confRead = new ReadConf();
 
     WritePPR pprEdit = new WritePPR();
+
+    WritesSource ssEdit = new WritesSource();
+
+    WriteNonc noncEdit = new WriteNonc();
 
 
     @Override
@@ -134,7 +140,16 @@ public class Index extends Application {
 
         });
 
+        //When clicked on Nonc Configuration
+        item3.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                noncEdit.displayWriteNonc(Comport.getConnectedPort(),indexStage);
+            }
+            else {
+                disconnected();
+            }
 
+        });
 
 
         //When clicked on Change Sampling Rate
@@ -148,7 +163,7 @@ public class Index extends Application {
 
         });
 
-        //When clicked on Change Sampling Rate
+        //When clicked on Pulse Per Revolution
         item5.setOnAction(e -> {
             if(Comport.isEcuConnected){
                 pprEdit.displayWritePPR(Comport.getConnectedPort(),indexStage);
@@ -159,6 +174,16 @@ public class Index extends Application {
 
         });
 
+        //When clicked on Signal source for Eng.RPM & Vehicle Speed
+        item6.setOnAction(e -> {
+            if(Comport.isEcuConnected){
+                ssEdit.displayWritesSource(Comport.getConnectedPort(),indexStage);
+            }
+            else {
+                disconnected();
+            }
+
+        });
 
 
         //When clicked on ERCH Read Configuration

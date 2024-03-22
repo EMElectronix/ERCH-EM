@@ -1,5 +1,9 @@
 
-r	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ­–ÿÿÿÿÿ8Ü²µßå1
+r	java:S117K"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ­–ÿÿÿÿÿ8æÛşå1
 u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ù»¾[8ß²µßå1
 o
-java:S3776#"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(©Èâµ8÷¹Éßå1
+java:S3776""RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(©Èâµ8ïÛşå1
+f
+java:S1128"DRemove this unused import 'desktop.app.erch.Sampling.WriteSampling'.(úë›Æûÿÿÿÿ8æÎ¦æ1
+N
+java:S1128"1Remove this unused import 'javafx.util.Duration'.(ç½®§8æÎ¦æ1

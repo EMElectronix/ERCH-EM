@@ -1,9 +1,12 @@
 package desktop.app.erch;
 
 import com.fazecast.jSerialComm.SerialPort;
+import desktop.app.erch.Nonc.ReadNonc;
 import desktop.app.erch.PPRVS.ReadPPR;
 import desktop.app.erch.RTC.ReadRTC;
 import desktop.app.erch.RTC.WriteRTC;
+import desktop.app.erch.SME.ReadSME;
+import desktop.app.erch.SSource.ReadsSource;
 import desktop.app.erch.Sampling.ReadSampling;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,6 +31,9 @@ public class ReadConf {
     Logger log = LogManager.getLogger(ReadConf.class);
 
     public void displayConfig(SerialPort selectedPort){
+        /***
+         displayConfig displays the dialog where various Parameters can be read
+         */
         confDialog = new Dialog<>();
         confDialog.setTitle("ERCH Configuration Info");
 
@@ -123,6 +129,51 @@ public class ReadConf {
         pprButtonNode.setOnAction(e -> {
             ReadPPR pprRead = new ReadPPR(selectedPort,confStage,log);
             Optional<String> result = pprRead.showAndWait();
+
+            result.ifPresent(finalOutput -> {
+                if(finalOutput.equals("previous")) {
+                    displayConfig(selectedPort);
+                }else{
+                    if(confDialog.isShowing()){
+                        confDialog.close();
+                    }
+                }
+            });
+        });
+
+        ssButtonNode.setOnAction(e -> {
+           ReadsSource ssRead = new ReadsSource(selectedPort,confStage,log);
+            Optional<String> result = ssRead.showAndWait();
+
+            result.ifPresent(finalOutput -> {
+                if(finalOutput.equals("previous")) {
+                    displayConfig(selectedPort);
+                }else{
+                    if(confDialog.isShowing()){
+                        confDialog.close();
+                    }
+                }
+            });
+        });
+
+        noncButtonNode.setOnAction(e -> {
+            ReadNonc noncRead = new ReadNonc(selectedPort,confStage,log);
+            Optional<String> result = noncRead.showAndWait();
+
+            result.ifPresent(finalOutput -> {
+                if(finalOutput.equals("previous")) {
+                    displayConfig(selectedPort);
+                }else{
+                    if(confDialog.isShowing()){
+                        confDialog.close();
+                    }
+                }
+            });
+        });
+
+        sevButtonNode.setOnAction(e -> {
+            ReadSME smeRead = new ReadSME(selectedPort,confStage,log);
+            Optional<String> result = smeRead.showAndWait();
 
             result.ifPresent(finalOutput -> {
                 if(finalOutput.equals("previous")) {

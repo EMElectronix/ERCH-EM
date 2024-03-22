@@ -1,6 +1,6 @@
 
 9
-java:S1643G"Use a StringBuilder instead.(”¾æ¶8ƒ±ÂŞå1
-u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8„±ÂŞå1
+java:S1643I"Use a StringBuilder instead.(”¾æ¶8Ë şå1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8Î şå1
 \
-java:S1118":Add a private constructor to hide the implicit public one.(âŠ°ÿÿÿÿÿ8š±ÂŞå1
+java:S1118":Add a private constructor to hide the implicit public one.(âŠ°ÿÿÿÿÿ8å şå1

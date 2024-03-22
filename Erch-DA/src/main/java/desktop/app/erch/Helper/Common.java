@@ -1,8 +1,10 @@
 package desktop.app.erch.Helper;
 
 import com.fazecast.jSerialComm.SerialPort;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 import org.apache.logging.log4j.Logger;
 
 import java.time.format.DateTimeFormatter;
@@ -91,8 +93,17 @@ public class Common {
         sof(errorMessage, failed, false);
     }
 
+    public static Tooltip fill(String message){
+        Tooltip fillTooltip = new Tooltip(message);
+        fillTooltip.setShowDelay(Duration.ZERO);
+        return fillTooltip;
+    }
+
 
 
     public static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("ddMMyy");
     public static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hhmmssa");
+
+
+
 }

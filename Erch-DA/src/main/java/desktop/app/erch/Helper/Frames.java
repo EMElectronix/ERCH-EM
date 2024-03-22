@@ -2,8 +2,8 @@ package desktop.app.erch.Helper;
 
 public class Frames {
 
-    /* 'a' represents that frame is sent from ERCH ECU → PC */
-    /* 'b' represents that frame is sent from PC → ERCH ECU */
+    /*** 'a' represents that frame is sent from ERCH ECU → PC */
+    /*** 'b' represents that frame is sent from PC → ERCH ECU */
 
     //Connect Frame from PC → ERCH ECU(b010255-CRC)
     public static byte[] bConn(){
@@ -15,10 +15,15 @@ public class Frames {
         return new byte[]{0x62, 0x30, 0x32, 0x30, 0x32, 0x37, 0x37, (byte)0xDB, (byte)0x9D, 0x0D, 0x0A, 0x0D};
     }
 
+    //RTC Read Frame from PC → ERCH ECU(b030211-CRC)
     public static byte[] bRTCread(){
-        return new byte[]{0x62, 0x30, 0x33, 0x30, 0x32, 0x38, 0x37, (byte) 0xEB, (byte) 0xA5, 0x0D, 0x0A, 0x0D};
+        return new byte[]{0x62, 0x30, 0x33, 0x30, 0x32, 0x31, 0x31, (byte) 0xB9, 0x23, 0x0D, 0x0A, 0x0D};
     }
 
+    //SME Read Frame from PC → ERCH ECU(b060211-CRC)
+    public static byte[] bsmeread(){
+        return new byte[]{0x62, 0x30, 0x36, 0x30, 0x32, 0x31, 0x31, (byte) 0xB9, (byte) 0xEF, 0x0D, 0x0A, 0x0D};
+    }
 
     //Realtime Start Frame from PC → ERCH ECU(b110211-CRC)
     public static byte[] bRealtimeStart(){
@@ -31,7 +36,14 @@ public class Frames {
         return new byte[]{0x62, 0x31, 0x32, 0x30, 0x32, 0x31, 0x31, (byte)0xA8, 0x1F, 0x0D, 0x0A, 0x0D};
     }
 
-    //Realtime Stop Frame from PC → ERCH ECU(b120211-CRC)
+
+    // Nonc Config Read Frame from PC → ERCH ECU(b130211-CRC)
+    public static byte[] bNoncRead(){
+        return new byte[]{0x62, 0x31, 0x33, 0x30, 0x32, 0x31, 0x31, 0x68, 0x22,0x0D,0x0A,0x0D};
+    }
+
+
+    //Pulse per Rev read Frame from PC → ERCH ECU(b160211-CRC)
     public static byte[] bPprRead(){
         return new byte[]{0x62, 0x31, 0x36, 0x30, 0x32, 0x31, 0x31, 0x68, (byte)0xEE,0x0D,0x0A,0x0D};
     }
@@ -40,6 +52,13 @@ public class Frames {
     public static byte[] bSamplingRead(){
         return new byte[]{0x62, 0x31, 0x38, 0x30, 0x32, 0x31, 0x31, (byte) 0xA9, (byte)0x87,0x0D,0x0A,0x0D};
     }
+
+    //Signal Source Read Frame from PC → ERCH ECU(b200211-CRC)
+    public static byte[] bssRead(){
+        return new byte[]{0x62, 0x32, 0x30, 0x30, 0x32, 0x31, 0x31,  0x5B,  0x66, 0x0D, 0x0A, 0x0D};
+    }
+
+
 
 
 

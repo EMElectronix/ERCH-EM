@@ -16,14 +16,18 @@ public class Connect {
       Logger log = LogManager.getLogger(Connect.class);
       String errorMessage = "Error";
 
-      public  String ecuSN ;
-      public  String vehSN ;
+      public static String ecuSN ;
+      public static String vehMN ;
 
        public String vehEN ;
 
        public String connectedPort;
 
       public boolean Connection(SerialPort selectedPort){
+
+          /***
+           Connection displays the dialog where Connection can be established
+           */
 
           if(selectedPort!=null){
               try{
@@ -35,11 +39,11 @@ public class Connect {
                       if(data!=null) {
 
                           ecuSN = data.substring(2, 10);
-                          vehSN = data.substring(10, 18);
+                          vehMN = data.substring(10, 18);
                           vehEN = data.substring(18, 26);
 
                           log.info("ECUsn : {}" , ecuSN);
-                          log.info("VEHsn : {}" , vehSN);
+                          log.info("VEHmn : {}" , vehMN);
                           log.info("VEHen : {}" , vehEN);
 
                           return true;
@@ -70,12 +74,12 @@ public class Connect {
 
      }
 
-     public String getEcuSN(){
-          return this.ecuSN;
+     public static String getEcuSN(){
+          return ecuSN;
      }
 
-     public String getVehSN(){
-          return this.vehSN;
+     public static String getVehMN(){
+          return vehMN;
      }
 
     public String getVehEN(){

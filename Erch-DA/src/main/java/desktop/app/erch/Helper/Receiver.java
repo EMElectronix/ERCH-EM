@@ -77,9 +77,14 @@ public class Receiver {
             int calculatedCRC = calculateCRC(Arrays.copyOf(erchResponse,
                     erchResponse.length - 5));
 
-            log.info("Rcrc : {}  Ccrc : {}",receivedCRC,calculatedCRC);
             String responseString = new String(erchResponse, StandardCharsets.UTF_8);
             String fC = responseString.substring(0,3);
+
+            // Rcrc - Received CRC, Ccrc - Calculated CRC
+            log.info("Rcrc : {}  Ccrc : {}",receivedCRC,calculatedCRC);
+            // Rfc -  Recieved Function code, Afc - Actual Fucntion Code
+            log.info("Rfc  : {}  Afc : {}",fC,funCode);
+
             int numBytes = Integer.parseInt(responseString.substring(3,5));
             String data = responseString.substring(5,numBytes+5);
             log.info("DATA : {}",data);

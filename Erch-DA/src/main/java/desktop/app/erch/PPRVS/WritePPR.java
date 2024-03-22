@@ -26,7 +26,6 @@ public class WritePPR {
 
     Dialog<ButtonType> writeDialog;
 
-    String pprWrite = "Write Pulse per Revolution";
 
     String data;
     Logger log = LogManager.getLogger(WritePPR.class);
@@ -40,6 +39,10 @@ public class WritePPR {
             boolean portOpened = selectedPort.openPort();
             if (portOpened)
             {
+
+                Receiver ppr = new Receiver();
+                data = ppr.receiveFrame(selectedPort, "Read Pulse Per Revolution",
+                        "a16", 20, bPprRead(), log);
 
                 writeDialog = new Dialog<>();
                 writeDialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource
@@ -61,8 +64,6 @@ public class WritePPR {
                 Label turboLabel      = new Label("Turbocharger Speed                 ");
                 Label coolingLabel    = new Label("Cooling Fan Speed                  ");
 
-                Tooltip fillTooltip = new Tooltip("Please Fill");
-                fillTooltip.setShowDelay(Duration.ZERO);
 
                 Spinner<Integer>[] spinner = new Spinner[5];
 
@@ -79,7 +80,7 @@ public class WritePPR {
                                     return change;
                                 }
                                 else {
-                                    Tooltip.install(spinner[I], fillTooltip);
+                                    Tooltip.install(spinner[I], fill("Please Fill"));
                                     return null;
                                 }
                             }));
@@ -87,9 +88,6 @@ public class WritePPR {
                 }
 
 
-                Receiver ppr = new Receiver();
-                data = ppr.receiveFrame(selectedPort, "Read Pulse Per Revolution",
-                        "a16", 20, bPprRead(), log);
 
                 String magnetic = data.substring(0, 2);
                 String alternator = data.substring(2, 4);
@@ -106,22 +104,22 @@ public class WritePPR {
 
 
                 // Add labels to a GridPane
-                GridPane gridPane = new GridPane();
+                GridPane grid = new GridPane();
 
-                gridPane.setHgap(15);
-                gridPane.setVgap(10); // Adjust vertical gap
-                gridPane.setAlignment(Pos.CENTER);
+                grid.setHgap(15);
+                grid.setVgap(10); // Adjust vertical gap
+                grid.setAlignment(Pos.CENTER);
 
-                gridPane.add(magneticLabel, 0, 0);
-                gridPane.add(spinner[0], 1, 0);
-                gridPane.add(alternatorLabel, 0, 1);
-                gridPane.add(spinner[1], 1, 1);
-                gridPane.add(vehicleLabel, 0, 2);
-                gridPane.add(spinner[2], 1, 2);
-                gridPane.add(turboLabel, 0, 3);
-                gridPane.add(spinner[3], 1, 3);
-                gridPane.add(coolingLabel, 0, 4);
-                gridPane.add(spinner[4], 1, 4);
+                grid.add(magneticLabel, 0, 0);
+                grid.add(spinner[0], 1, 0);
+                grid.add(alternatorLabel, 0, 1);
+                grid.add(spinner[1], 1, 1);
+                grid.add(vehicleLabel, 0, 2);
+                grid.add(spinner[2], 1, 2);
+                grid.add(turboLabel, 0, 3);
+                grid.add(spinner[3], 1, 3);
+                grid.add(coolingLabel, 0, 4);
+                grid.add(spinner[4], 1, 4);
 
                 // Define the changeButtonType
                 ButtonType changeButtonType = new ButtonType("Change", ButtonBar.ButtonData.OK_DONE);
@@ -161,11 +159,12 @@ public class WritePPR {
                         String crcHex = calculateCRCHex(outputBytes);
 
                         String finalFrame = concat + crcHex;
-                        log.info("Sampling Write frame : {}", finalFrame);
+                        log.info("Pulse per Rev Write frame : {}", finalFrame);
 
                         //calculateCRC
                         String wData = ppr.receiveFrame(selectedPort,"Write Pulse Per Revolution","a15",
                                 12,finalFrame,log);
+
 
                         if(wData.equals("OK")) {
                             selectedPort.closePort();
@@ -184,7 +183,7 @@ public class WritePPR {
 
 
                 // Set the dialog content and show the dialog
-                writeDialog.getDialogPane().setContent(gridPane);
+                writeDialog.getDialogPane().setContent(grid);
                 writeDialog.showAndWait();
 
 
