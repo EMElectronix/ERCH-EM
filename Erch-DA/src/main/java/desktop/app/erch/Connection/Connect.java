@@ -19,9 +19,9 @@ public class Connect {
       public static String ecuSN ;
       public static String vehMN ;
 
-       public String vehEN ;
+       public static String vehEN ;
 
-       public String connectedPort;
+       public static String connectedPort;
 
       public boolean Connection(SerialPort selectedPort){
 
@@ -82,12 +82,12 @@ public class Connect {
           return vehMN;
      }
 
-    public String getVehEN(){
-        return this.vehEN;
+    public static String getVehEN(){
+        return vehEN;
     }
 
-    public String getConnectedPort(){
-        return this.connectedPort;
+    public static String getConnectedPort(){
+        return connectedPort;
     }
 
 

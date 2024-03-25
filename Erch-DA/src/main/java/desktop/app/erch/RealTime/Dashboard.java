@@ -16,14 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -48,8 +47,8 @@ public class Dashboard {
     VBox aP,cP,bL,hA;
     Button startStop;
 
-    String off = "/desktop/app/erch/Images/Off_buttons.png";
-    String on = "/desktop/app/erch/Images/On_buttons.png";
+    String off = "/desktop/app/erch/Images/off_buttons.png";
+    String on = "/desktop/app/erch/Images/on_buttons.png";
 
     String  pressed = "/desktop/app/erch/Images/Pressed.png";
     String released = "/desktop/app/erch/Images/Released.png";
@@ -65,12 +64,12 @@ public class Dashboard {
 
     String errorMessage = "Error";
 
+     Timer realTimeTimer = new Timer();
 
     public void displayDashboard (SerialPort selectedPort){
         /***
           displayDashboard : All Gauges, digital lcd, that represent Realtime are added
          */
-
 
         Stage dashboardStage = new Stage();
         dashboardStage.setTitle("Realtime Data Dashboard");
@@ -138,19 +137,19 @@ public class Dashboard {
         /***••• Lcd Gauge Design Starts •••***/
 
         // Turbocharger Speed
-        tcS = new LCD("Turbocharger Speed", "RPM", "RPM",120000,
+        tcS = new LCD("Turbocharger Speed",0, "RPM", "RPM",120000,
                 LcdDesign.GREEN_DARKGREEN, true, 90000,190);
 
         // Cooling Fan Speed
-        cfS = new LCD("Cooling Fan Speed", "RPM", "RPM",60000,
+        cfS = new LCD("Cooling Fan Speed",0, "RPM", "RPM",60000,
                 LcdDesign.GREEN_DARKGREEN, true, 50000,190);
 
         // Alternator Speed
-        aS  = new LCD("Alternator Speed", "RPM", "RPM",60000,
+        aS  = new LCD("Alternator Speed",0, "RPM", "RPM",60000,
                 LcdDesign.GREEN_DARKGREEN, true, 50000,190);
 
         // Battery Voltage
-        baV = new LCD("Battery ", "V", "V",32,
+        baV = new LCD("Battery ",1, "V", "V",32,
                 LcdDesign.BLACK_YELLOW, true, 30,100);
 
         /***--- Lcd Gauge Design Ends ---***/
@@ -321,20 +320,66 @@ public class Dashboard {
         finalpane4.setPrefSize(150,150);
         finalpane4.setAlignment(Pos.BOTTOM_LEFT);
 
+        dashboardStage.setOnCloseRequest(event -> {
+            String currentStatus = getStatus(startStop);
+            if (currentStatus.equals("ON")) {
+                realtimeStop(selectedPort);
+            }
+        });
+
+
+
         GridPane finishedPane = new GridPane();
+
+        // Calculate percentage values for margin based on screen size
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+        log.info(String.valueOf(screenWidth));
+        log.info(String.valueOf(screenHeight));
+
+
+//        0 margin from the top edge.
+//        800 pixels margin from the right edge.
+//        500 pixels margin from the bottom edge.
+//        10 pixels margin from the left edge.
+/*** new Insets(margin from the top edge , margin from the right edge, margin from the bottom edge, margin from the left edge)); */
+
+        GridPane.setMargin(finalpane1, new Insets
+                (screenHeight*0.1225, screenWidth*0.0651, 0, screenWidth*0.5924));
+        GridPane.setMargin(finalpane2, new Insets
+                (screenHeight*0.1225, screenWidth*0.5924, 0, screenWidth*0.0651));
+        GridPane.setMargin(finalpane3, new Insets
+                (screenHeight*0.0980, screenWidth*0.4361, 0, screenWidth*0.4394));
+        GridPane.setMargin(allOutput,new Insets
+                (0,0,-(screenHeight*0.9803),screenWidth*0.1497));
+        GridPane.setMargin(finalpane4, new Insets
+                (screenHeight * 0.6127, screenWidth * 0.8789, -(screenHeight * 0.1225), screenWidth * 0.0195));
+        GridPane.setMargin(baV, new Insets
+                (screenHeight * 0.0122, 0, 0, screenWidth * 0.7812));
+        GridPane.setMargin(allInput, new Insets
+                (0, 0, screenHeight*0.6127, screenWidth*0.2929));
+        GridPane.setMargin(dropdownButton, new Insets
+                (0, 0, screenHeight*0.6127, screenWidth*0.1302));
+        GridPane.setMargin(aatGauge, new Insets
+                (screenHeight*0.6617, 0, -(screenHeight*0.6617), screenWidth*0.4166));
+        GridPane.setMargin(startStop, new Insets
+                (0, screenWidth*0.5208, screenHeight*0.6127, screenWidth*0.0065));
 
         finishedPane.getChildren().addAll(finalpane1,finalpane2,finalpane3,allOutput,finalpane4,baV,allInput,
                                           dropdownButton,aatGauge,startStop);
-        GridPane.setMargin(finalpane1, new Insets(100, 100, 0, 910));
-        GridPane.setMargin(finalpane2, new Insets(100, 910, 0, 100));
-        GridPane.setMargin(finalpane3, new Insets(80, 670, 0, 675));
-        GridPane.setMargin(allOutput,new Insets(0,0,-800,230));
-        GridPane.setMargin(finalpane4, new Insets(500, 1350, -100, 30));
-        GridPane.setMargin(baV, new Insets(10, 0, 0, 1200));
-        GridPane.setMargin(allInput, new Insets(0, 0, 500, 450));
-        GridPane.setMargin(dropdownButton, new Insets(0, 0, 500, 200));
-        GridPane.setMargin(aatGauge, new Insets(540, 0, -540, 640));
-        GridPane.setMargin(startStop, new Insets(0, 800, 500, 10));
+
+
+        /*** Initially Developed Margin Width ***/
+//        GridPane.setMargin(finalpane1, new Insets(100, 100, 0, 910));
+//        GridPane.setMargin(finalpane2, new Insets(100, 910, 0, 100));
+//        GridPane.setMargin(finalpane3, new Insets(80, 670, 0, 675));
+//        GridPane.setMargin(allOutput,new Insets(0,0,-800,230));
+//        GridPane.setMargin(finalpane4, new Insets(500, 1350, -100, 30));
+//        GridPane.setMargin(baV, new Insets(10, 0, 0, 1200));
+//        GridPane.setMargin(allInput, new Insets(0, 0, 500, 450));
+//        GridPane.setMargin(dropdownButton, new Insets(0, 0, 500, 200));
+//        GridPane.setMargin(aatGauge, new Insets(540, 0, -540, 640));
+//        GridPane.setMargin(startStop, new Insets(0, 800, 500, 10));
 
 
         dashLayout.setCenter(finishedPane);
@@ -390,6 +435,9 @@ public class Dashboard {
 
             serialPort.closePort();
 
+            //Stop the Timer
+            realTimeTimer.cancel();
+
         } catch (Exception connectionException) {
             log.error("Error opening COM port: {}" , connectionException.getMessage());
             connectionException.printStackTrace(); // Print the stack trace for detailed information
@@ -403,8 +451,6 @@ public class Dashboard {
         RealtimeTask is used to receive frames from ECU
          */
 
-        // Initialize a timer for unexpected stop detection
-        final Timer[] timer = {new Timer()};
 
         Task<Void> backgroundTask = new Task<>() {
             @Override
@@ -424,21 +470,21 @@ public class Dashboard {
                     byte[] realtimeResponse = realtimeBuffer.toByteArray();
 
                     // Reset the timer each time a response is received
-                    timer[0].cancel();
-                    timer[0] = new Timer();
-                    timer[0].schedule(new TimerTask() {
+                    realTimeTimer.cancel();
+                    realTimeTimer = new Timer(); // Initialize a new timer
+                    realTimeTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-
                             String currentStatus = getStatus(startStop);
-                            if(currentStatus.equals("ON")){
+                            if (currentStatus.equals("ON")) {
                                 // Timeout action
                                 Platform.runLater(() -> {
                                     sof("RealTime Failed", "Error Updating Realtime❗", false);
-                                    sof("Connection Issue", "No Realtime Updates for a while. Update has stopped." +"\nPlease check port Connection!", false);
+                                    sof("Connection Issue", "No Realtime Updates for a while. Update has stopped." + "\nPlease check port Connection!", false);
                                 });
                                 serialPort.closePort();
-                            }}
+                            }
+                        }
                     }, 20000); // 20 seconds timeout
 
                     if  (containsSequence(realtimeResponse, new byte[]{0x0D,0x0A,0x0D},log)) {
@@ -449,10 +495,14 @@ public class Dashboard {
                         System.out.println(" \n ");
 
                         String responseString = new String(realtimeResponse, StandardCharsets.UTF_8);
-                        String data = responseString.substring(6, 108);
+                        String data = "120230320240303001" + responseString.substring(6, 109);
+                        log.info(" Data response : {} -- {}",data.length(),data);
 
                         // Use Platform.runLater to update UI components
-                        Platform.runLater(() -> processAndShowData(data.getBytes()));
+                        Platform.runLater(() -> {
+                          String[] realTimeValues =  processAndShowData(data.getBytes(),true,log);
+                            dataUpdate(realTimeValues);
+                        });
                         realtimeBuffer.reset();
                         rCounter.addAndGet(1);
 
@@ -473,86 +523,9 @@ public class Dashboard {
 
 
 
-    public void processAndShowData(byte[] response) {
-        /*
-        processAndShowData so that each value is stored in its respective Gauge.
-         */
-
-        // Convert byte array to string
-        String dataString = new String(response, StandardCharsets.UTF_8);
-
-        // Print raw data for inspection
-        log.info("Raw Data: {}" , dataString);
-
-        // Define the lengths of each field
-        int[] fieldLengths = {
-                4,  //1.cylinder head temp 7
-                4,  //2.cylinder head temp 8
-                4,  //3.engine oil temp
-                3,  //4.ambient air temp
-                3,  //5.ambient air pressure
-                3,  //6.exhaust air pressure
-                3,  //7.engine oil pressure
-                2,  //8.battery voltage
-                5,  //9.engine speed
-                6,  //10.turbocharger speed
-                5,  //11.cooling fan speed
-                3,  //12.vehicle speed
-                5,  //13.AlternatorSpeed
-                4,  //14.MeanSeaLevelAltitude
-                1,  //15.AcceleratorPedalInput
-                1,  //16.ClutchPedalInput
-                1,  //17.BreakLeverInput
-                1,  //18.HighAltitudeSwitchInput
-                1,  //19.BrakeSolStatus
-                1,  //20.CoolingSolStatus
-                1,  //21.FuelSolStatus
-                1,  //22.PreheaterSolStatus
-                10,  //23.EngineStartedCount
-                10,  //24.EngineOverspeedCount
-                10,  //25.EngineOverheatCount
-                10  //26.VehicleOverspeedCount
-        };
 
 
-        // Process the data based on the lengths
-        int startIndex = 0;
-        List<String> dataValues = new ArrayList<>();
-        for (int i = 0; i < fieldLengths.length; i++) {
-            int length = fieldLengths[i];
-            int endIndex = startIndex + length;
-            String fieldValue = dataString.substring(startIndex, endIndex);
-            String processedValue = processRealtimeValue(i, fieldValue);
-            dataValues.add(processedValue);
-            startIndex = endIndex;
-        }
 
-        dataUpdate(dataValues.toArray(new String[0]));
-
-    }
-
-    private String processRealtimeValue(int fieldIndex, String fieldValue) {
-        /*
-        processRealtimeValue so that each value is stored in its respective field.
-         */
-        switch (fieldIndex) {
-            case 0,1,2:
-                String tempSignResult = tempSign(fieldValue);
-                String processTempResult = processTemp(fieldValue);
-                return tempSignResult + processTempResult;
-            case 3:
-                return tempSign(fieldValue)+fieldValue.substring(1,3);
-            case 4:
-                return String.valueOf(processPressure(fieldValue,100));
-            case 5,6:
-                return String.valueOf(processPressure(fieldValue,10));
-            case 14,15,16,17,18,19,20,21:
-                return processStatus(fieldValue);
-
-            default:
-                return fieldValue.trim(); // Default processing
-        }
-    }
 
     private VBox statusIcon(String imagePath,String statusName){
 
@@ -695,61 +668,63 @@ public class Dashboard {
 
 
 
-
     public void dataUpdate(String[] realtimeValues) {
 
         /*
         dataUpdate updates all the GaugeValues
          */
 
+        log.info(" Date : {}",realtimeValues[0] );
+        log.info(" Time : {}",realtimeValues[1] );
+
         /****** Temperature Gauges Update ******/
 
-        ch7Gauge.getRGauge().setValue(Double.parseDouble(realtimeValues[0]));
-        ch8Gauge.getRGauge().setValue(Double.parseDouble(realtimeValues[1]));
-        eotGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[2]));
-        aatGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[3]));
+        ch7Gauge.getRGauge().setValue(Double.parseDouble(realtimeValues[2]));
+        ch8Gauge.getRGauge().setValue(Double.parseDouble(realtimeValues[3]));
+        eotGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[4]));
+        aatGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[5]));
 
 
         /****** Pressure Gauges Update ******/
 
-        aapGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[4]));
-        exapGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[5]));
-        eopGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[6]));
+        aapGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[6]));
+        exapGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[7]));
+        eopGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[8]));
 
 
         /****** Battery and Speed Gauges Update ******/
 
-        baV.getLcdGauge().setValue(Double.parseDouble(realtimeValues[7]));
-        rpmGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[8]));
-        tcS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[9]));
-        cfS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[10]));
-        vsGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[11]));
-        aS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[12]));
-        altitude.setValue(Double.parseDouble(realtimeValues[13]));
+        baV.getLcdGauge().setValue(Double.parseDouble(realtimeValues[9]));
+        rpmGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[10]));
+        tcS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[11]));
+        cfS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[12]));
+        vsGauge.getRGauge().setValue(Double.parseDouble(realtimeValues[13]));
+        aS.getLcdGauge().setValue(Double.parseDouble(realtimeValues[14]));
+        altitude.setValue(Double.parseDouble(realtimeValues[15]));
 
         /****** Input Status Update ******/
 
 
-        setInput(aP, realtimeValues[14]);
-        setInput(cP, realtimeValues[15]);
-        setInput(bL, realtimeValues[16]);
-        setOutput(hA, realtimeValues[17]);
+        setInput(aP, realtimeValues[16]);
+        setInput(cP, realtimeValues[17]);
+        setInput(bL, realtimeValues[18]);
+        setOutput(hA, realtimeValues[19]);
 
         /****** Output Status Update ******/
 
 
-        setOutput(ebS, realtimeValues[18]);
-        setOutput(cvS, realtimeValues[19]);
-        setOutput(fsS, realtimeValues[20]);
-        setOutput(hsS, realtimeValues[21]);
+        setOutput(ebS, realtimeValues[20]);
+        setOutput(cvS, realtimeValues[21]);
+        setOutput(fsS, realtimeValues[22]);
+        setOutput(hsS, realtimeValues[23]);
 
 
         /****** Counter Update ******/
 
-        countInp[0].setText(String.valueOf(Integer.parseInt(realtimeValues[22])));
-        countInp[1].setText(String.valueOf(Integer.parseInt(realtimeValues[23])));
-        countInp[2].setText(String.valueOf(Integer.parseInt(realtimeValues[24])));
-        countInp[3].setText(String.valueOf(Integer.parseInt(realtimeValues[25])));
+        countInp[0].setText(String.valueOf(Integer.parseInt(realtimeValues[24])));
+        countInp[1].setText(String.valueOf(Integer.parseInt(realtimeValues[25])));
+        countInp[2].setText(String.valueOf(Integer.parseInt(realtimeValues[26])));
+        countInp[3].setText(String.valueOf(Integer.parseInt(realtimeValues[27])));
 
         /****** Led Update ******/
 

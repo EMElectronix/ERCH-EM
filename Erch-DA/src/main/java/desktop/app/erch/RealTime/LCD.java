@@ -12,16 +12,16 @@ public class LCD extends Region {
     Constructor to create LCD Gauge
      */
     private  Gauge Speed;
-    public LCD(String title, String subTitle, String unit, double MaxValue , LcdDesign lcdDesign, boolean thresholdVisible, double threshold, int Width) {
-        initGraphics(title, subTitle, unit, MaxValue, lcdDesign, thresholdVisible, threshold,Width);
+    public LCD(String title, int decimals,String subTitle, String unit, double MaxValue , LcdDesign lcdDesign, boolean thresholdVisible, double threshold, int Width) {
+        initGraphics(title, decimals,subTitle, unit, MaxValue, lcdDesign, thresholdVisible, threshold,Width);
     }
 
-    private void initGraphics(String title, String subTitle, String unit, double MaxValue,LcdDesign lcdDesign, boolean thresholdVisible, double threshold,int Width) {
+    private void initGraphics(String title, int decimals, String subTitle, String unit, double MaxValue,LcdDesign lcdDesign, boolean thresholdVisible, double threshold,int Width) {
        Speed = GaugeBuilder.create()
                 .skinType(Gauge.SkinType.LCD)
                // .animated(true)
                 .title(title)
-               .decimals(0)
+               .decimals(decimals)
                .prefWidth(Width)
                .borderWidth(10)
                .minValue(0)

@@ -10,11 +10,17 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static desktop.app.erch.Helper.Common.erchIcon;
+import static desktop.app.erch.Connection.Connect.*;
+import static desktop.app.erch.Helper.Common.*;
 import static desktop.app.erch.Helper.Display.sof;
+import static desktop.app.erch.Helper.Query.connQuery;
 import static desktop.app.erch.Index.mainMenuBar;
 
 public class Comport {
@@ -50,7 +56,6 @@ public class Comport {
         // Add icon
         Stage comportStage = (Stage) comDialog.getDialogPane().getScene().getWindow();
         comportStage.getIcons().add(erchIcon);
-
 
 
         // Create ComboBox for COM Port selection
@@ -162,8 +167,19 @@ public class Comport {
                  if(comDialog.isShowing()) {
                      comDialog.setResult(ButtonType.CLOSE);
                  }
+
                  isEcuConnected=true;
                  sof("Connection Established", "The connection has been established.", true);
+                 serialPort.closePort();
+
+                     try (Statement statement = database().createStatement()) {
+                         statement.execute(connQuery(getEcuSN(), getVehMN(), getVehEN()));
+                     } catch (SQLException ex) {
+                         throw new RuntimeException(ex);
+                     }
+
+             }else {
+                 sof("Connection Established", "Something Went Wrong...Retry !", false);
                  serialPort.closePort();
              }
 

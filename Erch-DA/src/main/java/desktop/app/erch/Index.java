@@ -1,6 +1,7 @@
 package desktop.app.erch;
 
 import desktop.app.erch.Connection.Comport;
+import desktop.app.erch.DataAcess.DataView;
 import desktop.app.erch.Nonc.WriteNonc;
 import desktop.app.erch.PPRVS.WritePPR;
 import desktop.app.erch.RTC.WriteRTC;
@@ -21,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 import static desktop.app.erch.Helper.Common.erchIcon;
@@ -45,6 +47,8 @@ public class Index extends Application {
     WriteSampling srEdit = new WriteSampling();
 
     ReadConf confRead = new ReadConf();
+
+    DataView accessData = new DataView();
 
     WritePPR pprEdit = new WritePPR();
 
@@ -186,6 +190,16 @@ public class Index extends Application {
         });
 
 
+        //When clicked on Access ERCH Data
+        item11.setOnAction(e -> {
+                try {
+                    accessData.displayDatalog();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+        });
+
         //When clicked on ERCH Read Configuration
         item12.setOnAction(e -> {
             if(Comport.isEcuConnected){
@@ -306,7 +320,6 @@ public class Index extends Application {
         switchImageWithFade switches Wallpaper Images
          */
 
-
         // Calculate the index of the next image
         currentImageIndex = (currentImageIndex + 1) % wallPapers.length;
 
@@ -337,8 +350,6 @@ public class Index extends Application {
         log.warn("Connection not Established");
         sof("Disconnected", "Connection not Established", false);
     }
-
-
 
 
     public static void main(String[] args) {

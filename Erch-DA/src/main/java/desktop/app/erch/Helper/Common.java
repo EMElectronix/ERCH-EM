@@ -1,13 +1,23 @@
 package desktop.app.erch.Helper;
 
 import com.fazecast.jSerialComm.SerialPort;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static desktop.app.erch.Helper.Display.sof;
@@ -67,12 +77,30 @@ public class Common {
         return input.replaceFirst("^0+", "");
     }
 
+    public static String getDatabaseURL() {
+        String currentWorkingDirectory = System.getProperty("user.dir");
+        String forwardSlashedPath = currentWorkingDirectory.replace("\\", "/");
+        String finalPath = "jdbc:sqlite:" + forwardSlashedPath + "/Database/erch.db";
+        return finalPath;
+    }
+
     public static String padWithZeros(String input, int desiredLength) {
         // If the input length is less than the desired length, pad with zeros
         while (input.length() < desiredLength) {
             input = "0" + input;
         }
         return input;
+    }
+
+
+    public static Connection database(){
+        Connection dbConn;
+        try {
+            dbConn = DriverManager.getConnection(getDatabaseURL());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dbConn;
     }
 
 
@@ -87,6 +115,8 @@ public class Common {
 
     }
 
+
+
     public static void fatal(String param,Logger log){
         String failed = param+" Failed❗";
         log.fatal(failed);
@@ -99,11 +129,65 @@ public class Common {
         return fillTooltip;
     }
 
+    public static class DataEntry {
+        public static int slNoCounter = 1;  // Counter for auto-incrementing Sl No.
+        private final int slNo;  // Auto-incremented Sl No.
+        private final List<StringProperty> properties;
+
+        public DataEntry(String[] dataValues) {
+            slNo = slNoCounter++;
+            properties = new ArrayList<>();
+            for (String value : dataValues) {
+                properties.add(new SimpleStringProperty(value));
+            }
+        }
+
+        public int getSlNo() {
+            return slNo;
+        }
+
+        public StringProperty getProperty(int index) {
+            return properties.get(index);
+        }
+    }
 
 
     public static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("ddMMyy");
     public static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hhmmssa");
 
+    public static final DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    public static void date(){
+        DatePicker start = new DatePicker();
+        DatePicker end = new DatePicker();
+
+        // Listener for start date changes
+        start.valueProperty().addListener((observable, oldValue, newValue) -> {
+            // If start date is selected, restrict end date to dates on or after start date
+            if (newValue != null) {
+                end.setDayCellFactory(picker -> new DateCell() {
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(date.isBefore(newValue));
+                    }
+                });
+            }
+        });
+
+
+        // Listener for end date changes
+        end.valueProperty().addListener((observable, oldValue, newValue) -> {
+            // If end date is selected, restrict start date to dates on or before end date
+            if (newValue != null) {
+                start.setDayCellFactory(picker -> new DateCell() {
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(date.isAfter(newValue));
+                    }
+                });
+            }
+        });
+    }
 
 
 }

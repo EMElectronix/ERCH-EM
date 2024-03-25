@@ -38,7 +38,7 @@ public class ReadsSource extends Dialog<String> {
                     initOwner(parent);
 
                     String engRPM = data.startsWith("0") ? "Magnetic Pickup" : "Alternator";
-                    String vsRPM = data.endsWith("0") ? "Magnetic Pickup" : "Alternator";
+                    String vsRPM = data.endsWith("0") ? "Magnetic Pickup" : "GPS Receiver";
 
                     TextField[] field = new TextField[2];
 
