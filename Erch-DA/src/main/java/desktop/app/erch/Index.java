@@ -56,6 +56,9 @@ public class Index extends Application {
 
     WriteNonc noncEdit = new WriteNonc();
 
+    Password secure = new Password();
+
+
 
     @Override
     public void start(Stage indexStage) {
@@ -180,12 +183,18 @@ public class Index extends Application {
 
         //When clicked on Signal source for Eng.RPM & Vehicle Speed
         item6.setOnAction(e -> {
-            if(Comport.isEcuConnected){
-                ssEdit.displayWritesSource(Comport.getConnectedPort(),indexStage);
+            if (secure.displayEnterPassword()) {
+                if (Comport.isEcuConnected) {
+                    ssEdit.displayWritesSource(Comport.getConnectedPort(), indexStage);
+                } else {
+                    disconnected();
+                }
             }
-            else {
-                disconnected();
-            }
+
+        });
+
+        item8.setOnAction(e -> {
+            secure.displayChangePassword();
 
         });
 

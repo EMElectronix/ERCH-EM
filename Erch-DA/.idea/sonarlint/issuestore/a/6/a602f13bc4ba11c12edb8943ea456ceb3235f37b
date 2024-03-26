@@ -1,0 +1,10 @@
+
+x
+java:S1488,"[Immediately return this expression instead of assigning it to the temporary variable "div".(µ–“İ8Òé–§ç1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8Öé–§ç1
+\
+java:S1118	":Add a private constructor to hide the implicit public one.(úà©ğıÿÿÿÿ8¾ê–§ç1
+^
+java:S1854"<Remove this useless assignment to local variable "dataByte".(´­Ôáıÿÿÿÿ8¾ê–§ç1
+O
+java:S1481"-Remove this unused "dataByte" local variable.(´­Ôáıÿÿÿÿ8Àê–§ç1

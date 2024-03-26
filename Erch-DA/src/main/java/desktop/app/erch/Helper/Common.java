@@ -3,6 +3,8 @@ package desktop.app.erch.Helper;
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tooltip;
@@ -11,16 +13,17 @@ import javafx.scene.layout.*;
 import javafx.util.Duration;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static desktop.app.erch.Connection.Connect.*;
 import static desktop.app.erch.Helper.Display.sof;
+import static desktop.app.erch.Helper.Query.deleteQuery;
+import static desktop.app.erch.Helper.Query.fetchSerialQuery;
 
 public class Common {
     static String errorMessage = "Error";
@@ -156,11 +159,27 @@ public class Common {
     public static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hhmmssa");
 
     public static final DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter dbformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public static void date(){
-        DatePicker start = new DatePicker();
-        DatePicker end = new DatePicker();
+    public static ObservableList<String> populateSerialComboBox(String vehicleNumber) {
+        // Method to populate serialComboBox based on selected vehicle number
 
+        ObservableList<String> serialNumbers = FXCollections.observableArrayList();
+        try (PreparedStatement stmt = database().prepareStatement(fetchSerialQuery())) {
+            stmt.setString(1, vehicleNumber);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                serialNumbers.add(rs.getString("ERCH Serial No."));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return serialNumbers;
+    }
+
+
+
+    public static void date(DatePicker start, DatePicker end) {
         // Listener for start date changes
         start.valueProperty().addListener((observable, oldValue, newValue) -> {
             // If start date is selected, restrict end date to dates on or after start date
@@ -173,7 +192,6 @@ public class Common {
                 });
             }
         });
-
 
         // Listener for end date changes
         end.valueProperty().addListener((observable, oldValue, newValue) -> {

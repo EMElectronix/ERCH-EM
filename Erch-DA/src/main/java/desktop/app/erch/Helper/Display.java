@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 import static desktop.app.erch.Helper.Common.erchIcon;
 
 public class Display {
@@ -69,7 +71,7 @@ public class Display {
     }
 
 
-    public static void dalert(String title, String content) {
+    public static void dalert(String title, String content, String ser, String veh) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -111,7 +113,7 @@ public class Display {
             if (buttonType == downloadAllButton) {
                 // Handle the "Download All" button click
                 Upload data = new Upload();
-                int recordsDownloaded = data.fetchAllData();
+                int recordsDownloaded = data.fetchAllData(ser,veh,true,null, null);
 
                 if (recordsDownloaded > 0) {
                     sof("DOWNLOAD ALL", "ALL "+recordsDownloaded+" Data Records Successfully Loaded.", true);

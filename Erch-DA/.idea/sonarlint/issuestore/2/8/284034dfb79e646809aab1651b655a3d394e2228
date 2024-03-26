@@ -1,0 +1,8 @@
+
+h	java:S112Æ"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8 Û£¨ç1
+_
+java:S1659&"BDeclare "item2" and all following declarations on a separate line.(¬üô8ÜÛ£¨ç1
+e
+java:S1659'"CDeclare "item12" and all following declarations on a separate line.(¬›“Ğıÿÿÿÿ8àÛ£¨ç1
+o
+java:S3776="RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(Ğœ„Ô8ôÛ£¨ç1

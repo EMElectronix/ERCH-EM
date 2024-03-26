@@ -1,0 +1,19 @@
+
+g	java:S112e"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8é¬¾§ç1
+9
+java:S1643Z"Use a StringBuilder instead.(”¾æ¶8÷¬¾§ç1
+ƒ
+java:S1488S"aImmediately return this expression instead of assigning it to the temporary variable "finalPath".(™Äş»üÿÿÿÿ8÷¬¾§ç1
+z
+java:S1104…"WMake slNoCounter a static final constant or non-public and provide accessors if needed.( ÚÇÖıÿÿÿÿ8”²Ï§ç1
+T
+java:S1444…"1Make this "public static slNoCounter" field final( ÚÇÖıÿÿÿÿ8”²Ï§ç1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8ù¬¾§ç1
+|
+java:S1845"^Rename field "dateformatter" to prevent any misunderstanding/clash with field "dateFormatter".(¶³íè8ƒÕ¾§ç1
+\
+java:S1118":Add a private constructor to hide the implicit public one.(âŠ°ÿÿÿÿÿ8ÇãÎ§ç1
+]
+java:S1161©":Add the "@Override" annotation above this method signature(—Õ¨úÿÿÿÿ8‚®¾§ç1
+]
+java:S1161·":Add the "@Override" annotation above this method signature(—Õ¨úÿÿÿÿ8„®¾§ç1

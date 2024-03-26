@@ -1,0 +1,33 @@
+
+a
+java:S6208¦"CMerge the previous cases into this one using comma-separated label.(›¤Îù8å¸¬ç1
+q
+java:S1104 "TMake logStage a static final constant or non-public and provide accessors if needed.(Â‡ü´8‰…€«ç1
+w
+java:S1104#"UMake tableView a static final constant or non-public and provide accessors if needed.(ñ§ŠÌüÿÿÿÿ8ä°”ªç1
+y
+java:S1104%"WMake dataCounter a static final constant or non-public and provide accessors if needed.(¢ÛÌ©ùÿÿÿÿ8ä°”ªç1
+K
+java:S1444 ".Make this "public static logStage" field final(Â‡ü´8‰…€«ç1
+Q
+java:S1444#"/Make this "public static tableView" field final(ñ§ŠÌüÿÿÿÿ8Ñ‚•ªç1
+S
+java:S1444%"1Make this "public static dataCounter" field final(¢ÛÌ©ùÿÿÿÿ8ä°”ªç1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â‡Ãçüÿÿÿÿ8ÂŒ¨ç1
+o
+java:S37761"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(–‘ˆ»8¶±”ªç1
+‹
+java:S11301"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(–‘ˆ»8è«ë¬ç1
+S
+java:S26963"6Make the enclosing method "static" or remove this set.(è–·š8Ô†€«ç1
+X	java:S125j"<This block of commented-out lines of code should be removed.(ÃåŸ¶8»±”ªç1
+U
+java:S1135”"2Complete the task associated to this TODO comment.(İ“ö‡üÿÿÿÿ8¿±”ªç1
+X
+java:S2209›"5Change this instance-reference to a static reference.(íÍØ—şÿÿÿÿ8Á±”ªç1
+X
+java:S2209§"5Change this instance-reference to a static reference.(™õ’©şÿÿÿÿ8üÎ´¬ç1
+Y
+java:S2696­"6Make the enclosing method "static" or remove this set.(İÚ¦åøÿÿÿÿ8şÎ´¬ç1
+T
+java:S2696Î"6Make the enclosing method "static" or remove this set.(±ò³å8»õµ¬ç1

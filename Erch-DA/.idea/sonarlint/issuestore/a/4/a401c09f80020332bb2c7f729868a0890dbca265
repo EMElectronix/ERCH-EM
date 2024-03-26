@@ -1,0 +1,15 @@
+
+Q
+java:S3740&"/Provide the parametrized type for this generic.(ÿÑÚùÿÿÿÿÿ8…Ëº®ç1
+Q
+java:S3740&"/Provide the parametrized type for this generic.(ÿÑÚùÿÿÿÿÿ8…Ëº®ç1
+z	java:S135@"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8…Ëº®ç1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â‡Ãçüÿÿÿÿ8ˆËº®ç1
+x	java:S1161"WRename this field "column_Names" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÅÜûşÿÿÿÿ8¸Ëº®ç1
+F	java:S106r"+Replace this use of System.out by a logger.(öÈÀ8ÁËº®ç1
+L	java:S106t"+Replace this use of System.out by a logger.(ƒÇãˆúÿÿÿÿ8ÁËº®ç1
+T
+java:S2696Ğ"6Make the enclosing method "static" or remove this set.(¶ä 8ÈËº®ç1
+^	java:S125×"<This block of commented-out lines of code should be removed.(÷Ø¤•ùÿÿÿÿ8ÈËº®ç1
+R
+java:S1128"5Remove this unused import 'javafx.scene.image.Image'.(‰¿½Ç8ÍËº®ç1

@@ -62,7 +62,27 @@ public class Query {
 //    }
 
     public static String fetchAllQuery() {
-        return "SELECT * FROM Datalog WHERE `Veh No.` = ? AND `Eng No.` = ? AND `Erch No.` = ?";
+        return "SELECT * FROM Datalog WHERE `Veh No.` = ? AND `Erch No.` = ?";
+    }
+
+    public static String fetchSelectedQuery() {
+        return "SELECT * FROM Datalog WHERE `Veh No.` = ? AND `Erch No.` = ? AND Date >= DATE(?) AND Date <= DATE(?)";
+    }
+
+    public static String changePasswordQuery(){
+        return "UPDATE Password SET password = ?";
+    }
+
+    public static String fetchPasswordQuery(){
+        return "SELECT password FROM Password";
+    }
+
+    public static String fetchSerialQuery(){
+        return "SELECT \"ERCH Serial No.\" FROM Devices WHERE \"Vmodel No.\" = ?";
+    }
+
+    public static String fetchModelQuery(){
+        return "SELECT DISTINCT \"Vmodel No.\" FROM Devices";
     }
 
 

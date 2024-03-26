@@ -1,0 +1,26 @@
+
+y
+java:S1192"WDefine a constant instead of duplicating this literal "AND \"Engine No.\" = '" 3 times.(àÑÇäûÿÿÿÿ8¥°‡¬ç1
+z
+java:S1192"^Define a constant instead of duplicating this literal "WHERE \"ERCH Serial No.\" = '" 3 times.(¸œ„;8¦°‡¬ç1
+s
+java:S1192"WDefine a constant instead of duplicating this literal "AND \"Vmodel No.\" = '" 3 times.(Î¼˜B8¦°‡¬ç1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·­°•8§°‡¬ç1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·­°•8§°‡¬ç1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·­°•8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÌ“Åúÿÿÿÿ8§°‡¬ç1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ«ëO8¨°‡¬ç1
+W
+java:S1118":Add a private constructor to hide the implicit public one.(Œ¸•Ð8«°‡¬ç1
+[
+java:S34005"9Remove this method and declare a constant for this value.(™öŒáøÿÿÿÿ8¬°‡¬ç1
+V
+java:S34009"9Remove this method and declare a constant for this value.(¿±àÆ8¬°‡¬ç1
+[
+java:S3400A"9Remove this method and declare a constant for this value.(¢³‹®úÿÿÿÿ8µñÖ­ç1
+X	java:S125<"<This block of commented-out lines of code should be removed.(ÂµÏÂ8íÑÖ­ç1

@@ -144,7 +144,7 @@ public class Upload {
 
         String[] datalogValues = processAndShowData(response,false,log);
         insertDataToDatabase(datalogValues);
-        fetchAllData();
+        fetchAllData(getEcuSN(),getVehMN(),true,null,null);
         tableView.refresh();
 
     }
@@ -192,8 +192,29 @@ public class Upload {
         }
     }
 
+    public static void clearDatabase() {
 
-    public int fetchAllData() {
+        try (PreparedStatement statement = database().prepareStatement(deleteQuery())) {
+            statement.setString(1, getVehMN()); // Replace vehNo with the actual vehicle number
+            statement.setString(2, getVehEN()); // Replace engNo with the actual engine number
+            statement.setString(3, getEcuSN()); // Replace erchNo with the actual erch number
+            statement.executeUpdate();
+
+            try (PreparedStatement junk = database().prepareStatement(deleteQuery())) {
+                String empty = "00000000";
+                junk.setString(1, empty);
+                junk.setString(2, empty);
+                junk.setString(3, empty);
+                junk.executeUpdate();
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public int fetchAllData(String ser, String veh, boolean alldata, LocalDate start, LocalDate end ) {
         errorDatabase();
 
         totalDeletedCount += deletedRecords.get();
@@ -210,15 +231,24 @@ public class Upload {
 
 
         try (Connection connection = DriverManager.getConnection(getDatabaseURL())) {
+            String query;
+            if (alldata) {
+                query = fetchAllQuery();
+            } else {
+                query = fetchSelectedQuery();
+            }
 
-            try (PreparedStatement statement = connection.prepareStatement(fetchAllQuery())) {
-//                statement.setString(1, getVehMN());
-//                statement.setString(2, getVehEN());
-//                statement.setString(3, getEcuSN());
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                if (alldata) {
+                    statement.setString(1, veh);
+                    statement.setString(2, ser);
+                } else {
+                    statement.setString(1, veh);
+                    statement.setString(2, ser);
+                    statement.setString(3, start.format(dbformatter));
+                    statement.setString(4, end.format(dbformatter));
+                }
 
-                statement.setString(1, "VMS15680");
-                statement.setString(2, "98765432");
-                statement.setString(3, "12345A88");
 
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
